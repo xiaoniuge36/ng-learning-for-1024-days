@@ -277,7 +277,6 @@ console.log(array1.concat(array2, array3, array4, [1, 2, 3]));// [5, 12, 8, 130
 **用法：**
 ```js
 arr.copyWithin(target[, start[, end]])
-
 ```
 **返回值：**
 改变后的数组。
@@ -285,28 +284,79 @@ arr.copyWithin(target[, start[, end]])
 ```js
 ```
 ### 1.4 entries()
+返回一个新的数组Iterator（迭代器）对象，该对象包含数组中每个索引的键/值对。
 **用法：**
 ```js
+arr.entries()
 ```
 **返回值：**
+> 一个新的 Array 迭代器对象。Array Iterator是对象，它的原型（__proto__:Array Iterator）上有一个next方法，可用用于遍历迭代器取得原数组的 [key,value]。
 **实例：**
 ```js
+let array1 = ['a', 'b', 'c'];
+
+let iterator1 = array1.entries();
+
+console.log(iterator1.next());// {value: Array(2), done: false}
+
+console.log(iterator1.next().value);// [1, 'b']
+
+console.log(iterator1.next().value);// [2, 'c']
+
+console.log(iterator1.next().value);//undefined
+
+console.log(iterator1.next());// {value: undefined, done: true}
 ```
 ### 1.5 every()
+检测数组中条件是否都符合条件。返回一个布尔值。如果为空数组则返回true，不改变原数组。
 **用法：**
 ```js
+arr.every(callback(element[, index[, array]])[, thisArg])
 ```
+callback为回调函数，里面包含的参数 element表示用于当前值，index当前值的索引，array表示调用的数组，thisArg，执行方法时回调函数的callback的this值（可指定），如果不指定在非严格模式下是指向window，在严格模式下指向的是undefined。
 **返回值：**
+每一个都通过返回true（返回是[truthy](https://developer.mozilla.org/zh-CN/docs/Glossary/Truthy) 值），有一个不通过返回false
 **实例：**
 ```js
+let array = [1, 2, 3, 4, 5];
+
+console.log(array.every((element) => element > 4));//false
+console.log(array.every((element) => element < 6));// true
+
+let array1 = [1,2,3,4,5,6];
+// array1.every(function (currentValue, index, arr) {
+       // 0;
+//     console.log(this);
+//     return this < currentValue;
+// }, 0);
+
+array1.every(function (currentValue, index, arr) {
+    //window;
+    console.log(this);
+    return 0 < currentValue;
+});
 ```
 ### 1.6 fill()
+用一个值填充数组中的指定元素，可以指定开始和结束的索引，不包括结束索引。
 **用法：**
 ```js
+arr.fill(value[, start[, end]])
 ```
+value用来填充元素的值，start（可选）起始索引，默认值为 0，end（可选）终止索引，默认值为this.length（数组最够一个数索引+1=this.length）
 **返回值：**
+修改后的数组
 **实例：**
 ```js
+// fill方法
+console.log([1, 2, 3, 4, 5].fill(0));// [0, 0, 0, 0, 0]
+console.log([1, 2, 3, 4, 5].fill(0, 1, 3));// [1, 0, 0, 4, 5]
+console.log([1, 2, 3, 4, 5].fill(0, 2));// [1, 2, 0, 0, 0]
+console.log([1, 2, 3, 4, 5].fill(0, -1));// [1, 2, 3, 4, 0]
+console.log([1, 2, 3, 4, 5].fill(0, 5));// [1, 2, 3, 4, 5]
+console.log([1, 2, 3, 4, 5].fill([1]));// [Array(1), Array(1), Array(1), Array(1), Array(1)]
+
+//生成一个二维数组
+console.log([0,0].map(() => new Array(3).fill(0)));//[Array(3), Array(3)]
 ```
 ### 1.7 filter()
 **用法：**
