@@ -14,7 +14,7 @@ highlight: tomorrow
 **学习重点：** 总结一下js数组常用的一些原生方法（API)(下)
 ## 1.数组方法总结(下)
 ### 1.1 push()
-方法将一个或多个元素添加到数组的末尾，并返回该数组的新长度。
+将一个或多个元素添加到数组的末尾，返回该数组的新长度,会改变原数组。
 **用法：**
 ```js
 arr.push(element1, ..., elementN)
@@ -27,6 +27,12 @@ elementN
 
 **实例：**
 ```js
+let array1 = [1,2,3,4];
+let array2 = [5,6,7,8];
+console.log(array1.push(5));// 5
+console.log(array1);// [1, 2, 3, 4, 5]
+//合并两个数组，array2（第二个数组） 过大时候少用
+console.log(Array.prototype.push.apply(array1, array2));// 9
 ```
 ### 1.2 reduce()
  方法对数组中的每个元素按序执行一个由您提供的 reducer 函数，每一次运行 reducer 会将先前元素的计算结果作为参数传入，最后将其结果汇总为单个返回值。
@@ -50,9 +56,18 @@ initialValue 可选
 使用 “reducer” 回调函数遍历整个数组后的结果。
 **实例：**
 ```js
+let array1 = [1,2,3,4];
+
+console.log(array1.reduce((acc, cur) => { return acc + cur }));//10
 ```
 ### 1.3 reduceRight() 
 方法接受一个函数作为累加器（accumulator）和数组的每个值（从右到左）将其减少为单个值。
+//reduceRight() 方法对数组中的每个元素执行一个由您提供的函数。
+// reduceRight() 方法接受一个函数作为参数，该函数调用一个累加器（accumulator）和当前值（currentValue），并且返回一个值。
+// reduceRight() 方法会从数组的右侧开始，同时将累加器的值与当前值进行累加。
+// reduceRight() 方法会把累加器的值作为数组中的最后一个值，并且返回这个值。
+// reduceRight() 方法会把累加器的值作为数组中的最后一个值，并且返回这个值。
+
 **用法：**
 ```js
 arr.reduceRight(callback(accumulator, currentValue[, index[, array]])[, initialValue])
@@ -70,10 +85,14 @@ array可选
 initialValue可选
 首次调用 callback 函数时，累加器 accumulator 的值。如果未提供该初始值，则将使用数组中的最后一个元素，并跳过该元素。如果不给出初始值，则需保证数组不为空。
 否则，在空数组上调用 reduce 或 reduceRight 且未提供初始值（例如 [].reduce( (acc, cur, idx, arr) => {} ) ）的话，会导致类型错误 TypeError: reduce of empty array with no initial value。
+
 **返回值：**
 执行之后的返回值。
+
 **实例：**
 ```js
+let array1 = [1,2,3,4];
+console.log(array1.reduceRight((pre, cur) => { return pre + cur }));//10
 ```
 ### 1.4 reverse() 
 方法将数组中元素的位置颠倒，并返回该数组。数组的第一个元素会变成最后一个，数组的最后一个元素变成第一个。该方法会改变原数组。
@@ -85,6 +104,9 @@ initialValue可选
 颠倒后的数组。
 **实例：**
 ```js
+let array1 = [1,2,3,4];
+console.log(array1.reverse());//[ 4, 3, 2, 1 ]
+console.log(array1);//[ 4, 3, 2, 1 ]
 ```
 ### 1.5 shift() 
 方法从数组中删除第一个元素，并返回该元素的值。此方法更改数组的长度。
@@ -96,6 +118,9 @@ arr.shift()
 从数组中删除的元素; 如果数组为空则返回undefined 。
 **实例：**
 ```js
+let array1 = [1,2,3,4];
+console.log(array1.shift());// 1
+console.log(array1);// [2, 3, 4]
 ```
 ### 1.6 slice() 
 方法返回一个新的数组对象，这一对象是一个由 begin 和 end 决定的原数组的浅拷贝（包括 begin，不包括end）。原始数组不会被改变。
@@ -111,6 +136,13 @@ end 可选
 一个含有被提取元素的新数组。
 **实例：**
 ```js
+let array1 = [1,2,3,4];
+console.log(array1.slice(0, 2));//[1, 2]
+console.log(array1.slice(2));// [3, 4]
+console.log(array1.slice(2, 4));// [3, 4]
+console.log(array1.slice(2, -2));// []
+console.log(array1.slice(-2, -3));// []
+console.log(array1);// [1, 2, 3, 4]
 ```
 ### 1.7 some() 
 方法测试数组中是不是至少有 1 个元素通过了被提供的函数测试。它返回的是一个 Boolean 类型的值。如果用一个空数组进行测试，在任何情况下它返回的都是false。
@@ -132,11 +164,14 @@ thisArg可选
 数组中有至少一个元素通过回调函数的测试就会返回true；所有元素都没有通过回调函数的测试返回值才会为 false。
 **实例：**
 ```js
+let array1 = [1,2,3,4];
+console.log(array1.some((item) => { return item > 2 }));// true
+console.log(array1.some((item) => { return item > 5 }));// false
 ```
 ### 1.8 sort() 
 方法用原地算法对数组的元素进行排序，并返回数组。默认排序顺序是在将元素转换为字符串，然后比较它们的 UTF-16 代码单元值序列时构建的
 
-由于它取决于具体实现，因此无法保证排序的时间和空间复杂性。
+由于它取决于具体实现，因此无法保证排序的时间和空间复杂性。 会改变原数组
 **用法：**
 ```js
 arr.sort([compareFunction])
@@ -151,9 +186,14 @@ secondEl
 排序后的数组。请注意，数组已原地排序，并且不进行复制。
 **实例：**
 ```js
+let array1 = [1,3,2,4];
+console.log(array1.sort((a, b) => { return a - b }));// [1, 2, 3, 4]
+console.log(array1.sort((a, b) => { return b - a }));// [4, 3, 2, 1]
+console.log(array1);// [4, 3, 2, 1]
 ```
 ### 1.9 splice() 
 方法通过删除或替换现有元素或者原地添加新的元素来修改数组，并以数组形式返回被修改的内容。此方法会改变原数组。
+方法用于删除数组中的一部分，并返回被删除的元素。
 **用法：**
 ```js
 array.splice(start[, deleteCount[, item1[, item2[, ...]]]])
@@ -164,13 +204,20 @@ deleteCount 可选
 整数，表示要移除的数组元素的个数。如果 deleteCount 大于 start 之后的元素的总数，则从 start 后面的元素都将被删除（含第 start 位）。如果 deleteCount 被省略了，或者它的值大于等于array.length - start(也就是说，如果它大于或者等于start之后的所有元素的数量)，那么start之后数组的所有元素都会被删除。如果 deleteCount 是 0 或者负数，则不移除元素。这种情况下，至少应添加一个新元素。
 item1, item2, ... 可选
 要添加进数组的元素，从start 位置开始。如果不指定，则 splice() 将只删除数组元素
+
 **返回值：**
 由被删除的元素组成的一个数组。如果只删除了一个元素，则返回只包含一个元素的数组。如果没有删除元素，则返回空数组。
+
 **实例：**
 ```js
+
+let array1 = [1,3,2,4];
+console.log(array1.splice(1,2));//[ 3, 2 ]
+console.log(array1);//[1,4]
 ```
 ### 1.10 toLocaleString() 
 返回一个字符串表示数组中的元素。数组中的元素将使用各自的 toLocaleString 方法转成字符串，这些字符串将使用一个特定语言环境的字符串（例如一个逗号 ","）隔开
+
 **用法：**
 ```js
 arr.toLocaleString([locales[,options]]);
@@ -184,6 +231,9 @@ options 可选
 表示数组元素的字符串。
 **实例：**
 ```js
+let array1 = [1,3,2,4];
+console.log(array1.toLocaleString());//1,3,2,4
+
 ```
 ### 1.11 toString() 
 返回一个字符串，表示指定的数组及其元素。
@@ -195,19 +245,27 @@ arr.toString()
 一个表示指定的数组及其元素的字符串。
 **实例：**
 ```js
+let array1 = [1,3,2,4];
+console.log(array1.toString());//2 1,3,2,4
 ```
 ### 1.12 unshift() 
 方法将一个或多个元素添加到数组的开头，并返回该数组的新长度（该方法修改原有数组）。
+
 **用法：**
 ```js
 arr.unshift(element1, ..., elementN)
 ```
 elementN
 要添加到数组开头的元素或多个元素。
+
 **返回值：**
 当一个对象调用该方法时，返回其 length 属性值。
 **实例：**
 ```js
+
+let array1 = [1,3,2,4];
+console.log(array1.unshift(5));//5
+console.log(array1);//[5, 1, 3, 2, 4]
 ```
 ### 1.13 values() 
 方法返回一个新的 Array Iterator 对象，该对象包含数组每个索引的值。
@@ -219,12 +277,17 @@ arr.values()
 一个新的 Array 迭代对象。
 **实例：**
 ```js
+let array1 = [1,3,2,4];
+console.log(array1.values());// Array Iterator {}
+console.log(array1);// [1, 3, 2, 4]
 ```
+## 今日精进
+leetcode 无重复字符的最长子串(滑块窗口解题)解题思路很重要。
 # Day9【2022年7月31日】 
 **学习重点：** 总结一下js数组常用的一些原生方法（API)(中)
 ## 1.数组方法总结(中)
 ### 1.1 forEach()
-方法对数组的每个元素执行一次给定的函数。
+对数组的每个元素执行一次给定的函数。不会改变原数组，不可终止循环，可以通过抛出异常的方式终止异常。没有返回值。
 **用法：**
 ```js
 arr.forEach(callback(currentValue [, index [, array]])[, thisArg])
@@ -263,64 +326,53 @@ thisArg 可选
 **实例：**
 ```js
 ```
-### 1.3 group()
-**用法：**
-```js
-```
-**返回值：**
-**实例：**
-```js
-```
-### 1.4 groupToMap()
-**用法：**
-```js
-```
-**返回值：**
-**实例：**
-```js
-```
-<h3 id="includes_top"  > 1.5 includes() </h3>
-方法判断一个值列表是否包含一个指定的，根据情况，如果包含返回true，否则返回false
-
+<h3 id="includes_top"  > 1.3 includes() </h3>
+判断数组中是否包括一个指定的值，包括返回true不包括返回false。
 **用法：**
 ```js
 arr.includes(valueToFind[, fromIndex])
 ```
-valueToFind
-需要寻找的元素值。
+valueToFind需要寻找的元素值。
 
-备注：使用比较字符串和不同时是大小写的。 includes()
-
-fromIndex 任选
-如果从fromIndex索引处开始搜索查找valueToFind。如果为负载从array.length + fromIndex的索引开始搜索（然后是从绝对值开始往前跳fromIndex的序号索引个），默认为0。
+fromIndex （可选）默认值为0，选择的话表示从该索引开始查找，若为负数则会根据公式（arr.length+fromIndex）进行转换。
 
 **返回值：**
-如果在目录中（或指定的范围中）找到了，则返回，返回Boolean。
-fromIndexvalueToFindtruefalse
-
-0 的将值涂抹，与标志性符号即-0 （0 和+0 ），但false不被认为与0 误。
+返回true/false，正0和负0视为相等。
 **实例：**
 ```js
+let array = [1,2,3,4,5];
+console.log(array.includes(1));// true
+console.log(array.includes(2));// true
+console.log(array.includes(3,1));// true
+console.log(array.includes(4,4));// false
+console.log(array.includes(5,-1));// true
+console.log(array.includes());// false
 ```
-<h3 id="indexOf_top"  > 1.6 indexOf() </h3>
-返回方法在目录中可以找到一个给定元素的第一个索引，如果不存在，则返回-1。
+可以看出如果不传参的话默认返回false
+<h3 id="indexOf_top"  > 1.4 indexOf() </h3>
+返回数组中对应元素的索引，若不存在则返回-1。不改变原数组。
 **用法：**
 ```js
 arr.indexOf(searchElement[, fromIndex])
 ```
-searchElement
-要寻找的元素
-fromIndex 任选
-如果该列表中的参数是一个更大的位置或索引，将在列表中列出一个更大的值。即 -1 从最后一个元素开始查找，-2 从倒数第二个元素开始，以此类推。 注意：如果参数中提供的索引值是一个负值，不会改变其查找顺序，查找顺序推进现在是从前追回追查线索。如果其后的追踪值低于0，则整个索引值都被查询。默认值00。
-
+searchElement要寻找的元素
+fromIndex(可选)选择开始查找的索引，若为-1则表示从后向前查找，其他负数的话以此类推，不填则默认为0。
 **返回值：**
-
 首个被找到的元素在目录中的索引位置；若无则返回 -1
 **实例：**
 ```js
+let array = [1,2,3,4,5];
+console.log(array.indexOf(1));// 0
+console.log(array.indexOf(2));// 1
+console.log(array.indexOf(3,1));// 2
+console.log(array.indexOf(4,4));// -1
+console.log(array.indexOf(5,-1));// 4
+console.log(array.indexOf());// -1
+console.log(array);// [1, 2, 3, 4, 5]
 ```
 ### 1.7 isArray()
-用于确定传递的值是否是一个Array。
+判断一个值是否为数组。
+
 **用法：**
 ```js
 Array.isArray(obj)
@@ -328,12 +380,27 @@ Array.isArray(obj)
 obj需要检测的值。
 
 **返回值：**
-如果值是 Array，则为 true；否则为 false。
+
+如果是 Array，则为 true；否则为 false。
+
 **实例：**
 ```js
+console.log(Array.isArray([1,2,3,4,5]));// true
+console.log(Array.isArray({0:1,1:2,2:3,3:4,4:5}));// false
+console.log(Array.isArray(function(){}));// false
+console.log(Array.isArray(/^/));// false
+console.log(Array.isArray(new Date()));// false
+console.log(Array.isArray(new Map()));// false
+console.log(Array.isArray(new Set()));// false
+console.log(Array.isArray(Array.prototype));// true
+Array.isArray(new Array());// true
+Array.isArray(new Array('a', 'b', 'c', 'd'))// true
 ```
 ### 1.8 join()
-方法将一个数组（或一个类数组对象）的所有元素连接成一个字符串并返回这个字符串。如果数组只有一个项目，那么将返回该项目而不使用分隔符。
+方法将一个数组（或一个类数组对象）的所有元素连接成一个字符串并返回这个字符串。如果数组只有一个项目，那么将返回该项目而不使用分隔符。如果一个元素为 `undefined` 或 `null`，它会被转换为空字符串。所有的数组元素被转换成字符串，再用一个分隔符将这些字符串连接起来。
+
+将一个数组或者类数组对象（类数组是可以当作数组来使用的对象）转换成字符串，并用传入的分隔符连接起来，若数组中有一个元素为undefined或null则会被转换为空字符串。
+
 **用法：**
 ```js
 arr.join([separator])
@@ -341,10 +408,18 @@ arr.join([separator])
 separator 可选
 指定一个字符串来分隔数组的每个元素。如果需要，将分隔符转换为字符串。如果缺省该值，数组元素用逗号（,）分隔。如果separator是空字符串 ("")，则所有元素之间都没有任何字符。
 
+
+
 **返回值：**
 一个所有数组元素连接的字符串。如果 arr.length 为 0，则返回空字符串。
 **实例：**
 ```js
+let array1 = [1,3,2,4];
+console.log(array1.join(''));// 1324
+console.log(array1.join('-'));// 1-3-2-4
+console.log(array1.join('-', '*'));// 1-3-2-4
+console.log(array1.join('-', '*', '#'));// 1-3-2-4
+console.log(array1);// [1, 3, 2, 4]
 ```
 ### 1.9 keys()
 方法返回一个包含数组中每个索引键的Array Iterator对象。
@@ -356,6 +431,14 @@ arr.keys()
 一个新的 Array 迭代器对象。
 **实例：**
 ```js
+let array1 = [1,3,2,4];
+console.log(array1.keys());// Array Iterator {}
+console.log(array1.values());//Array Iterator {}
+console.log(array1.entries());// Array Iterator {}
+console.log(array1.entries().next());// {value: Array(2), done: false}
+console.log(array1.entries().next().value);//  [0, 1]
+console.log(array1.entries().next().value[0]);//7 0
+console.log(array1);// [1, 3, 2, 4]
 ```
 ### 1.10 lastIndexOf()
 方法返回指定元素（也即有效的 JavaScript 值或变量）在数组中的最后一个的索引，如果不存在则返回 -1。从数组的后面向前查找，从 fromIndex 处开始。
@@ -374,6 +457,10 @@ fromIndex 可选
 lastIndexOf 使用严格相等（strict equality，即 ===）比较 searchElement 和数组中的元素。
 **实例：**
 ```js
+let array1 = [1,3,2,4];
+console.log(array1.lastIndexOf(3));//1
+console.log(array1.lastIndexOf(3,2));//1
+console.log(array1.lastIndexOf(3,3));//1
 ```
 ### 1.11 map()
  方法创建一个新数组，这个新数组由原数组中的每个元素都调用一次提供的函数后的返回值组成。
@@ -397,6 +484,10 @@ thisArg可选
 一个由原数组每个元素执行回调函数的结果组成的新数组
 **实例：**
 ```js
+let array1 = [1,3,2,4];
+console.log(array1.map(item=>{return item*2}));// [2, 6, 4, 8]
+console.log(array1.map(item=>{return item*2}).reduce((pre,cur)=>{return pre+cur}));// 20
+console.log(array1);// [1, 3, 2, 4]
 ```
 ### 1.12 of()
 创建一个具有可变数量参数的新数组实例，而不考虑参数的数量或类型。
@@ -411,6 +502,12 @@ elementN
 新的 Array 实例。
 **实例：**
 ```js
+Array.of(7);       // [7]
+Array.of(1, 2, 3); // [1, 2, 3]
+
+Array(7);          // [ , , , , , , ]
+Array(1, 2, 3);    // [1, 2, 3]
+
 ```
 ### 1.13 pop()
 方法从数组中删除最后一个元素，并返回该元素的值。此方法会更改数组的长度。
@@ -422,6 +519,10 @@ arr.pop()
 从数组中删除的元素（当数组为空时返回undefined）。
 **实例：**
 ```js
+let array1 = [1,3,2,4];
+
+console.log(array1.pop()); //4   
+console.log(array1); //[1,3,2]
 ```
 
 # Day8【2022年7月30日】 
@@ -660,17 +761,27 @@ console.log(array.findLastIndex((element) => element === 6));//-1
 一个值是否包含在该数组中，使用 Array.prototype.includes()。同样地，它检查每个元素是否和值相等，而不是使用一个测试函数。
 是否有任意一个元素满足提供的测试函数，使用 Array.prototype.some()。
 ### 1.12 flat()
-flat() 方法会按照一个可指定的深度递归遍历数组，并将所有元素与遍历到的子数组中的元素合并为一个新数组返回。遇到空项会直接去除。
+将数组中的元素与子数组合并成一个新数组，可以指定深度递归遍历的层数。若遇到空项会直接去除。原生扁平化方法。不会改变原数组，返回的是处理过的新数组。
+
 **用法：**
 ```js
 var newArray = arr.flat([depth])
 ```
-depth 可选
-指定要提取嵌套数组的结构深度，默认值为 1。
+depth（可选）指定要提取嵌套数组的结构深度，默认值为 1。
+
 **返回值：**
 一个包含将数组与子数组中所有元素的新数组。
+
 **实例：**
 ```js
+let array = [1,2,3,4,5,[1]];
+let array1 = [1,2,3,,5,[1]];
+let array2 = [1,2,3,4,5,[[1]]];
+console.log(array.flat());// [1, 2, 3, 4, 5, 1]
+console.log(array);//[1, 2, 3, 4, 5, Array(1)]
+console.log(array1.flat());// [1, 2, 3, 5, 1]
+console.log(array1);// [1, 2, 3, empty, 5, Array(1)]
+console.log(array2.flat(2));// [1, 2, 3, 4, 5, 1]
 ```
 ### 1.13 flatMap()
 flatMap() 方法首先使用映射函数映射每个元素，然后将结果压缩成一个新数组。它与 map 连着深度值为 1 的 flat 几乎相同，但 flatMap 通常在合并成一种方法的效率稍微高一些。
@@ -692,9 +803,14 @@ thisArg可选
 可选的。执行 callback 函数时 使用的this 值。
 **返回值：**
 一个新的数组，其中每个元素都是回调函数的结果，并且结构深度 depth 值为 1。
+
 **实例：**
 ```js
+
 ```
+## 2.今日精进
+ 9. 回文数（双向指正解题）
+复习解决方案结构师准备阶段内容，学习javaSE1，2讲。
 
 # Day7【2022年7月29日】 
 **学习重点：** 总结一下js字符串常用的一些原生方法（API)(下)
