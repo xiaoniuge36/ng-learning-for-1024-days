@@ -13,107 +13,210 @@ highlight: tomorrow
 # Day10【2022年8月1日】 
 **学习重点：** 总结一下js数组常用的一些原生方法（API)(下)
 ## 1.数组方法总结(下)
-### 1.1 
+### 1.1 push()
+方法将一个或多个元素添加到数组的末尾，并返回该数组的新长度。
 **用法：**
 ```js
+arr.push(element1, ..., elementN)
 ```
+elementN
+被添加到数组末尾的元素。
+
 **返回值：**
+当调用该方法时，新的 length 属性值将被返回。
+
 **实例：**
 ```js
 ```
-### 1.2 
+### 1.2 reduce()
+ 方法对数组中的每个元素按序执行一个由您提供的 reducer 函数，每一次运行 reducer 会将先前元素的计算结果作为参数传入，最后将其结果汇总为单个返回值。
+
+第一次执行回调函数时，不存在“上一次的计算结果”。如果需要回调函数从数组索引为 0 的元素开始执行，则需要传递初始值。否则，数组索引为 0 的元素将被作为初始值 initialValue，迭代器将从第二个元素开始执行（索引为 1 而不是 0）。
 **用法：**
 ```js
+reduce(function(previousValue, currentValue, currentIndex, array) { /* ... */ }, initialValue)
 ```
+callbackFn
+一个 “reducer” 函数，包含四个参数：
+
+previousValue：上一次调用 callbackFn 时的返回值。在第一次调用时，若指定了初始值 initialValue，其值则为 initialValue，否则为数组索引为 0 的元素 array[0]。
+currentValue：数组中正在处理的元素。在第一次调用时，若指定了初始值 initialValue，其值则为数组索引为 0 的元素 array[0]，否则为 array[1]。
+currentIndex：数组中正在处理的元素的索引。若指定了初始值 initialValue，则起始索引号为 0，否则从索引 1 起始。
+array：用于遍历的数组。
+initialValue 可选
+作为第一次调用 callback 函数时参数 previousValue 的值。若指定了初始值 initialValue，则 currentValue 则将使用数组第一个元素；否则 previousValue 将使用数组第一个元素，而 currentValue 将使用数组第二个元素。
+
 **返回值：**
+使用 “reducer” 回调函数遍历整个数组后的结果。
 **实例：**
 ```js
 ```
-### 1.3 
+### 1.3 reduceRight() 
+方法接受一个函数作为累加器（accumulator）和数组的每个值（从右到左）将其减少为单个值。
 **用法：**
 ```js
+arr.reduceRight(callback(accumulator, currentValue[, index[, array]])[, initialValue])
 ```
+callback
+一个回调函数，用于操作数组中的每个元素，它可接受四个参数：
+accumulator
+累加器：上一次调用回调函数时，回调函数返回的值。首次调用回调函数时，如果 initialValue 存在，累加器即为 initialValue，否则须为数组中的最后一个元素（详见下方 initialValue 处相关说明）。
+currentValue
+当前元素：当前被处理的元素。
+index可选
+数组中当前被处理的元素的索引。
+array可选
+调用 reduceRight() 的数组。
+initialValue可选
+首次调用 callback 函数时，累加器 accumulator 的值。如果未提供该初始值，则将使用数组中的最后一个元素，并跳过该元素。如果不给出初始值，则需保证数组不为空。
+否则，在空数组上调用 reduce 或 reduceRight 且未提供初始值（例如 [].reduce( (acc, cur, idx, arr) => {} ) ）的话，会导致类型错误 TypeError: reduce of empty array with no initial value。
 **返回值：**
+执行之后的返回值。
 **实例：**
 ```js
 ```
-### 1.4
+### 1.4 reverse() 
+方法将数组中元素的位置颠倒，并返回该数组。数组的第一个元素会变成最后一个，数组的最后一个元素变成第一个。该方法会改变原数组。
 **用法：**
 ```js
+ arr.reverse()
 ```
 **返回值：**
+颠倒后的数组。
 **实例：**
 ```js
 ```
-### 1.5 
+### 1.5 shift() 
+方法从数组中删除第一个元素，并返回该元素的值。此方法更改数组的长度。
 **用法：**
 ```js
+arr.shift()
 ```
 **返回值：**
+从数组中删除的元素; 如果数组为空则返回undefined 。
 **实例：**
 ```js
 ```
-### 1.6 
+### 1.6 slice() 
+方法返回一个新的数组对象，这一对象是一个由 begin 和 end 决定的原数组的浅拷贝（包括 begin，不包括end）。原始数组不会被改变。
 **用法：**
 ```js
+arr.slice([begin[, end]])
 ```
+begin 可选
+提取起始处的索引（从 0 开始），从该索引开始提取原数组元素。如果该参数为负数，则表示从原数组中的倒数第几个元素开始提取，slice(-2) 表示提取原数组中的倒数第二个元素到最后一个元素（包含最后一个元素）。如果省略 begin，则 slice 从索引 0 开始。如果 begin 超出原数组的索引范围，则会返回空数组。
+end 可选
+提取终止处的索引（从 0 开始），在该索引处结束提取原数组元素。slice 会提取原数组中索引从 begin 到 end 的所有元素（包含 begin，但不包含 end）。slice(1,4) 会提取原数组中从第二个元素开始一直到第四个元素的所有元素（索引为 1, 2, 3 的元素）。如果该参数为负数， 则它表示在原数组中的倒数第几个元素结束抽取。 slice(-2,-1) 表示抽取了原数组中的倒数第二个元素到最后一个元素（不包含最后一个元素，也就是只有倒数第二个元素）。如果 end 被省略，则 slice 会一直提取到原数组末尾。如果 end 大于数组的长度，slice 也会一直提取到原数组末尾。
 **返回值：**
+一个含有被提取元素的新数组。
 **实例：**
 ```js
 ```
-### 1.7 
+### 1.7 some() 
+方法测试数组中是不是至少有 1 个元素通过了被提供的函数测试。它返回的是一个 Boolean 类型的值。如果用一个空数组进行测试，在任何情况下它返回的都是false。
 **用法：**
 ```js
+arr.some(callback(element[, index[, array]])[, thisArg])
 ```
+callback
+用来测试每个元素的函数，接受三个参数：
+element
+数组中正在处理的元素。
+index 可选
+数组中正在处理的元素的索引值。
+array可选
+some()被调用的数组。
+thisArg可选
+执行 callback 时使用的 this 值。
 **返回值：**
+数组中有至少一个元素通过回调函数的测试就会返回true；所有元素都没有通过回调函数的测试返回值才会为 false。
 **实例：**
 ```js
 ```
-### 1.8 
+### 1.8 sort() 
+方法用原地算法对数组的元素进行排序，并返回数组。默认排序顺序是在将元素转换为字符串，然后比较它们的 UTF-16 代码单元值序列时构建的
+
+由于它取决于具体实现，因此无法保证排序的时间和空间复杂性。
 **用法：**
 ```js
+arr.sort([compareFunction])
 ```
+compareFunction 可选
+用来指定按某种顺序进行排列的函数。如果省略，元素按照转换为的字符串的各个字符的 Unicode 位点进行排序。
+firstEl
+第一个用于比较的元素。
+secondEl
+第二个用于比较的元素。
 **返回值：**
+排序后的数组。请注意，数组已原地排序，并且不进行复制。
 **实例：**
 ```js
 ```
-### 1.9 
+### 1.9 splice() 
+方法通过删除或替换现有元素或者原地添加新的元素来修改数组，并以数组形式返回被修改的内容。此方法会改变原数组。
 **用法：**
 ```js
+array.splice(start[, deleteCount[, item1[, item2[, ...]]]])
 ```
+start
+指定修改的开始位置（从 0 计数）。如果超出了数组的长度，则从数组末尾开始添加内容；如果是负值，则表示从数组末位开始的第几位（从 -1 计数，这意味着 -n 是倒数第 n 个元素并且等价于 array.length-n）；如果负数的绝对值大于数组的长度，则表示开始位置为第 0 位。
+deleteCount 可选
+整数，表示要移除的数组元素的个数。如果 deleteCount 大于 start 之后的元素的总数，则从 start 后面的元素都将被删除（含第 start 位）。如果 deleteCount 被省略了，或者它的值大于等于array.length - start(也就是说，如果它大于或者等于start之后的所有元素的数量)，那么start之后数组的所有元素都会被删除。如果 deleteCount 是 0 或者负数，则不移除元素。这种情况下，至少应添加一个新元素。
+item1, item2, ... 可选
+要添加进数组的元素，从start 位置开始。如果不指定，则 splice() 将只删除数组元素
 **返回值：**
+由被删除的元素组成的一个数组。如果只删除了一个元素，则返回只包含一个元素的数组。如果没有删除元素，则返回空数组。
 **实例：**
 ```js
 ```
-### 1.10 
+### 1.10 toLocaleString() 
+返回一个字符串表示数组中的元素。数组中的元素将使用各自的 toLocaleString 方法转成字符串，这些字符串将使用一个特定语言环境的字符串（例如一个逗号 ","）隔开
 **用法：**
 ```js
+arr.toLocaleString([locales[,options]]);
 ```
+locales 可选
+带有 BCP 47 语言标记的字符串或字符串数组，关于locales参数的形式与解释，请看Intl页面。
+options 可选
+一个可配置属性的对象，对于数字 Number.prototype.toLocaleString()，对于日期Date.prototype.toLocaleString().
+
 **返回值：**
+表示数组元素的字符串。
 **实例：**
 ```js
 ```
-### 1.11 
+### 1.11 toString() 
+返回一个字符串，表示指定的数组及其元素。
 **用法：**
 ```js
+arr.toString()
 ```
 **返回值：**
+一个表示指定的数组及其元素的字符串。
 **实例：**
 ```js
 ```
-### 1.12 
+### 1.12 unshift() 
+方法将一个或多个元素添加到数组的开头，并返回该数组的新长度（该方法修改原有数组）。
 **用法：**
 ```js
+arr.unshift(element1, ..., elementN)
 ```
+elementN
+要添加到数组开头的元素或多个元素。
 **返回值：**
+当一个对象调用该方法时，返回其 length 属性值。
 **实例：**
 ```js
 ```
-### 1.13 
+### 1.13 values() 
+方法返回一个新的 Array Iterator 对象，该对象包含数组每个索引的值。
 **用法：**
 ```js
+arr.values()
 ```
 **返回值：**
+一个新的 Array 迭代对象。
 **实例：**
 ```js
 ```
@@ -121,18 +224,42 @@ highlight: tomorrow
 **学习重点：** 总结一下js数组常用的一些原生方法（API)(中)
 ## 1.数组方法总结(中)
 ### 1.1 forEach()
+方法对数组的每个元素执行一次给定的函数。
 **用法：**
 ```js
+arr.forEach(callback(currentValue [, index [, array]])[, thisArg])
 ```
+callback
+为数组中每个元素执行的函数，该函数接收一至三个参数：
+currentValue
+数组中正在处理的当前元素。
+index 可选
+数组中正在处理的当前元素的索引。
+array 可选
+forEach() 方法正在操作的数组。
+thisArg 可选
+可选参数。当执行回调函数 callback 时，用作 this 的值。
 **返回值：**
+undefined。
+
 **实例：**
 ```js
 ```
 ### 1.2 from()
+方法对一个类似数组或可迭代对象创建一个新的，浅拷贝的数组实例。
+
 **用法：**
 ```js
+Array.from(arrayLike[, mapFn[, thisArg]])
 ```
+arrayLike
+想要转换成数组的伪数组对象或可迭代对象。
+mapFn 可选
+如果指定了该参数，新数组中的每个元素会执行该回调函数。
+thisArg 可选
+可选参数，执行回调函数 mapFn 时 this 对象。
 **返回值：**
+一个新的数组实例。
 **实例：**
 ```js
 ```
@@ -152,75 +279,147 @@ highlight: tomorrow
 **实例：**
 ```js
 ```
-### 1.5 includes()
+<h3 id="includes_top"  > 1.5 includes() </h3>
+方法判断一个值列表是否包含一个指定的，根据情况，如果包含返回true，否则返回false
+
 **用法：**
 ```js
+arr.includes(valueToFind[, fromIndex])
 ```
+valueToFind
+需要寻找的元素值。
+
+备注：使用比较字符串和不同时是大小写的。 includes()
+
+fromIndex 任选
+如果从fromIndex索引处开始搜索查找valueToFind。如果为负载从array.length + fromIndex的索引开始搜索（然后是从绝对值开始往前跳fromIndex的序号索引个），默认为0。
+
 **返回值：**
+如果在目录中（或指定的范围中）找到了，则返回，返回Boolean。
+fromIndexvalueToFindtruefalse
+
+0 的将值涂抹，与标志性符号即-0 （0 和+0 ），但false不被认为与0 误。
 **实例：**
 ```js
 ```
-### 1.6 indexOf()
+<h3 id="indexOf_top"  > 1.6 indexOf() </h3>
+返回方法在目录中可以找到一个给定元素的第一个索引，如果不存在，则返回-1。
 **用法：**
 ```js
+arr.indexOf(searchElement[, fromIndex])
 ```
+searchElement
+要寻找的元素
+fromIndex 任选
+如果该列表中的参数是一个更大的位置或索引，将在列表中列出一个更大的值。即 -1 从最后一个元素开始查找，-2 从倒数第二个元素开始，以此类推。 注意：如果参数中提供的索引值是一个负值，不会改变其查找顺序，查找顺序推进现在是从前追回追查线索。如果其后的追踪值低于0，则整个索引值都被查询。默认值00。
+
 **返回值：**
+
+首个被找到的元素在目录中的索引位置；若无则返回 -1
 **实例：**
 ```js
 ```
 ### 1.7 isArray()
+用于确定传递的值是否是一个Array。
 **用法：**
 ```js
+Array.isArray(obj)
 ```
+obj需要检测的值。
+
 **返回值：**
+如果值是 Array，则为 true；否则为 false。
 **实例：**
 ```js
 ```
 ### 1.8 join()
+方法将一个数组（或一个类数组对象）的所有元素连接成一个字符串并返回这个字符串。如果数组只有一个项目，那么将返回该项目而不使用分隔符。
 **用法：**
 ```js
+arr.join([separator])
 ```
+separator 可选
+指定一个字符串来分隔数组的每个元素。如果需要，将分隔符转换为字符串。如果缺省该值，数组元素用逗号（,）分隔。如果separator是空字符串 ("")，则所有元素之间都没有任何字符。
+
 **返回值：**
+一个所有数组元素连接的字符串。如果 arr.length 为 0，则返回空字符串。
 **实例：**
 ```js
 ```
 ### 1.9 keys()
+方法返回一个包含数组中每个索引键的Array Iterator对象。
 **用法：**
 ```js
+arr.keys()
 ```
 **返回值：**
+一个新的 Array 迭代器对象。
 **实例：**
 ```js
 ```
 ### 1.10 lastIndexOf()
+方法返回指定元素（也即有效的 JavaScript 值或变量）在数组中的最后一个的索引，如果不存在则返回 -1。从数组的后面向前查找，从 fromIndex 处开始。
 **用法：**
 ```js
+arr.lastIndexOf(searchElement[, fromIndex])
 ```
+searchElement
+被查找的元素。
+fromIndex 可选
+从此位置开始逆向查找。默认为数组的长度减 1(arr.length - 1)，即整个数组都被查找。如果该值大于或等于数组的长度，则整个数组会被查找。如果为负值，将其视为从数组末尾向前的偏移。即使该值为负，数组仍然会被从后向前查找。如果该值为负时，其绝对值大于数组长度，则方法返回 -1，即数组不会被查找。
+返回值
+数组中该元素最后一次出现的索引，如未找到返回-1。
+
 **返回值：**
+lastIndexOf 使用严格相等（strict equality，即 ===）比较 searchElement 和数组中的元素。
 **实例：**
 ```js
 ```
 ### 1.11 map()
+ 方法创建一个新数组，这个新数组由原数组中的每个元素都调用一次提供的函数后的返回值组成。
 **用法：**
 ```js
+var new_array = arr.map(function callback(currentValue[, index[, array]]) {
+ // Return element for new_array 
+}[, thisArg])
 ```
+callback
+生成新数组元素的函数，使用三个参数：
+currentValue
+callback 数组中正在处理的当前元素。
+index可选
+callback 数组中正在处理的当前元素的索引。
+array可选
+map 方法调用的数组。
+thisArg可选
+执行 callback 函数时值被用作this。
 **返回值：**
+一个由原数组每个元素执行回调函数的结果组成的新数组
 **实例：**
 ```js
 ```
 ### 1.12 of()
+创建一个具有可变数量参数的新数组实例，而不考虑参数的数量或类型。
 **用法：**
 ```js
+Array.of(element0[, element1[, ...[, elementN]]])
 ```
+elementN
+任意个参数，将按顺序成为返回数组中的元素。
+
 **返回值：**
+新的 Array 实例。
 **实例：**
 ```js
 ```
 ### 1.13 pop()
+方法从数组中删除最后一个元素，并返回该元素的值。此方法会更改数组的长度。
 **用法：**
 ```js
+arr.pop()
 ```
 **返回值：**
+从数组中删除的元素（当数组为空时返回undefined）。
 **实例：**
 ```js
 ```
@@ -313,7 +512,7 @@ console.log(iterator1.next());// {value: undefined, done: true}
 ```js
 arr.every(callback(element[, index[, array]])[, thisArg])
 ```
-callback为回调函数，里面包含的参数 element表示用于当前值，index当前值的索引，array表示调用的数组，thisArg，执行方法时回调函数的callback的this值（可指定），如果不指定在非严格模式下是指向window，在严格模式下指向的是undefined。
+callback为回调函数，里面包含的参数 element表示用于当前值，index（可选）当前值的索引，array（可选）表示调用的数组，thisArg（可选）执行方法时回调函数的callback的this值（可指定），如果不指定在非严格模式下是指向全局对象window，在严格模式下指向的是undefined。
 **返回值：**
 每一个都通过返回true（返回是[truthy](https://developer.mozilla.org/zh-CN/docs/Glossary/Truthy) 值），有一个不通过返回false
 **实例：**
@@ -342,7 +541,7 @@ array1.every(function (currentValue, index, arr) {
 ```js
 arr.fill(value[, start[, end]])
 ```
-value用来填充元素的值，start（可选）起始索引，默认值为 0，end（可选）终止索引，默认值为this.length（数组最够一个数索引+1=this.length）
+value用来填充元素的值，start（可选）起始索引，默认值为 0，end（可选）终止索引，默认值为this.length（数组最够一个数索引+1=this.length），start若是负数则默认处理为atart+arr.length，end也是如此。
 **返回值：**
 修改后的数组
 **实例：**
@@ -359,58 +558,140 @@ console.log([1, 2, 3, 4, 5].fill([1]));// [Array(1), Array(1), Array(1), Array(
 console.log([0,0].map(() => new Array(3).fill(0)));//[Array(3), Array(3)]
 ```
 ### 1.7 filter()
+对数组中符合条件的元素进行筛选，会返回一个新数组。不改变原数组
 **用法：**
 ```js
+var newArray = arr.filter(callback(element[, index[, array]])[, thisArg])
 ```
+callback回调函数。emement表示遍历的当前元素，index（可选）遍历当前元素的索引，array（可选）遍历数组本身，[thisArg]（可选）可用来修改callback的this指向。更every一样，this不知道默认指向全局对象window，严格模式下是undefine。
+
 **返回值：**
+返回满足条件的新数组，如果没有任何数组元素通过测试，则返回空数组。
+
 **实例：**
 ```js
+let array = [1, 2, 3, 4, 5];
+console.log(array.filter((element) => element > 4));//[5]
+console.log(array.filter((element) => element < 6));// [1, 2, 3, 4, 5]
+console.log(array.filter((element) => element === 4));// [4]
+console.log(array.filter((element) => element === 5));//[5]
+console.log(array.filter((element) => element === 6));// []
 ```
 ### 1.8 find()
+找到符合条件的第一个元素否则返回undefined，不改变原数组。
+
 **用法：**
 ```js
+arr.find(callback[, thisArg])
 ```
+> callback在数组每一项上执行的函数，接收 3 个参数：element当前遍历到的元素。index可选当前遍历到的索引。array可选数组本身。thisArg可选执行回调时用作 this 的对象。
+
 **返回值：**
+返回符合条件的第一个值否则返回undefined
 **实例：**
 ```js
+let array = [1, 2, 3, 4, 5];
+
+console.log(array.find((element) => element > 4));// 5
+console.log(array.find((element) => element < 6));// 1
+console.log(array.find((element) => element === 4));// 4
+console.log(array.find((element) => element === 6));// undefined
 ```
+若找到一个元素的位置或者一个元素是否存在于数组中，请使用[includes](#includes_top)和[indexOf](#indexOf_top)。
 ### 1.9 findIndex()
+返回数组中满足条件的第一个元素的索引。若没有找到则返回-1。
 **用法：**
 ```js
+arr.findIndex(callback[, thisArg])
 ```
+参数的用法跟find一样
 **返回值：**
+返回对应的索引，否则返回-1.
 **实例：**
 ```js
+let array = [1, 2, 3, 4, 5];
+console.log(array.findIndex((element) => element > 4));// 4
+console.log(array.findIndex((element) => element < 6));//0
+console.log(array.findIndex((element) => element === 4));// 3
+console.log(array.findIndex((element) => element === 6));// -1
 ```
+跟find对应的是该方法返回的是索引find返回的是值，二者都是找到对应的第一个元素。
 ### 1.10 findLast()
+返回数组中满足条件的最后一个元素，若没找到则返回undefined。不改变原数组。
+
 **用法：**
 ```js
+arr.findLast(function(element, index, array) , thisArg)
 ```
+函数的三个参数依旧分别是，当前元素，对应索引，当前数组。
 **返回值：**
+返回满足条件的最大索引对应的值，否则返回undefined。
 **实例：**
 ```js
+let array = [1,2,3,4,5];
+
+console.log(array.findLast((element) => element > 4));// 5
+console.log(array.findLast((element) => element < 6));// 5
+console.log(array.findLast((element) => element === 4));// 4
+console.log(array.findLast((element) => element === 6));// undefined
 ```
 ### 1.11 findLastIndex()
+返回数组中满足条件的最后一个元素的索引，若没找到则返回undefined。不改变原数组。
 **用法：**
 ```js
+arr.findLastIndex(function(element, index, array) , thisArg)
 ```
+参数的含义跟findLast一样。
 **返回值：**
+返回满足条件的索引
 **实例：**
 ```js
+let array = [1,2,3,4,5];
+
+console.log(array.findLastIndex((element) => element > 4));//4
+console.log(array.findLastIndex((element) => element < 6));//4
+console.log(array.findLastIndex((element) => element === 4));//3
+console.log(array.findLastIndex((element) => element === 6));//-1
 ```
+**待改：**
+第一个匹配的元素，使用 find()。
+数组中最后一个匹配元素的索引，使用 findLastIndex()。
+值的索引，使用 Array.prototype.indexOf()。（它类似于 findIndex()，但是会检查每个元素是否和值相等，而不是使用一个测试函数。）
+一个值是否包含在该数组中，使用 Array.prototype.includes()。同样地，它检查每个元素是否和值相等，而不是使用一个测试函数。
+是否有任意一个元素满足提供的测试函数，使用 Array.prototype.some()。
 ### 1.12 flat()
+flat() 方法会按照一个可指定的深度递归遍历数组，并将所有元素与遍历到的子数组中的元素合并为一个新数组返回。遇到空项会直接去除。
 **用法：**
 ```js
+var newArray = arr.flat([depth])
 ```
+depth 可选
+指定要提取嵌套数组的结构深度，默认值为 1。
 **返回值：**
+一个包含将数组与子数组中所有元素的新数组。
 **实例：**
 ```js
 ```
 ### 1.13 flatMap()
+flatMap() 方法首先使用映射函数映射每个元素，然后将结果压缩成一个新数组。它与 map 连着深度值为 1 的 flat 几乎相同，但 flatMap 通常在合并成一种方法的效率稍微高一些。
 **用法：**
 ```js
+var new_array = arr.flatMap(function callback(currentValue[, index[, array]]) {
+    // return element for new_array
+}[, thisArg])
 ```
+callback
+可以生成一个新数组中的元素的函数，可以传入三个参数：
+currentValue
+当前正在数组中处理的元素
+index可选
+可选的。数组中正在处理的当前元素的索引。
+array可选
+可选的。被调用的 map 数组
+thisArg可选
+可选的。执行 callback 函数时 使用的this 值。
 **返回值：**
+一个新的数组，其中每个元素都是回调函数的结果，并且结构深度 depth 值为 1。
 **实例：**
 ```js
 ```
