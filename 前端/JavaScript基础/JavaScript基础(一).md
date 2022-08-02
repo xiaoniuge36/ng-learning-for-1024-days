@@ -151,6 +151,7 @@ proto 参数需为
 null 或
 除基本类型包装对象以外的对象
 如果 proto 不是这几类值，则抛出一个 TypeError 异常。
+
 **返回值：**
 
 一个新对象，带着指定的原型对象及其属性。
@@ -202,8 +203,11 @@ get
 set
 作为属性的 setter 函数，如果没有 setter 则为undefined。函数将仅接受参数赋值给该属性的新值。
 默认为 undefined
+
 **返回值：**
+
 修改后的对象
+
 **实例：**
 ```js
 let target3 = { a: 1};
@@ -233,13 +237,17 @@ console.log(target4); // { a: 3, b: 2, c: 3, d: 4 }
 直接拿出对象属性并修改相当于执行了get和set方法。
 ### 1.4 Object.defineProperty() 
 在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。修改一个属性。添加的属性值是不可修改（immutable）的。
+
 **用法：**
 ```js
 Object.defineProperty(obj, prop, descriptor)
 ```
 obj要定义属性的对象。prop要定义或修改的属性的名称或 Symbol 。descriptor要定义或修改的属性描述符。（传递的属性跟defineProperties一样）。
+
 **返回值：**
+
 修改后的对象
+
 **实例：**
 ```js
 let target5 = { a: 1, b: 2 };
@@ -265,6 +273,7 @@ Object.entries(obj)
 obj可以返回其可枚举属性的键值对的对象。
 **返回值：**
 给定对象自身可枚举属性的键值对数组。
+
 **实例：**
 ```js
 let target7 = { a: 1, b: 2 };
@@ -286,9 +295,11 @@ Object.freeze(obj)
 ```
 obj
 要被冻结的对象。
+
 **返回值：**
 
 被冻结的对象。
+
 **实例：**
 ```js
 let target8 = { a: 1, b: 2 };
@@ -311,8 +322,10 @@ Object.fromEntries(iterable);
 iterable类似 Array 、 Map 或者其它实现了可迭代协议的可迭代对象。
 
 **返回值：**
+
 一个由该迭代对象条目提供对应属性的新对象。
-实例：
+
+**实例：**
 ```js
 let target10 = { a: 1, b: 2 };
 let entries = Object.entries(target10);
@@ -335,6 +348,7 @@ obj需要查找的目标对象
 prop目标对象内属性名称
 
 **返回值：**
+
 如果指定的属性存在于对象上，则返回其属性描述符对象（property descriptor），否则返回 undefined。
 
 **实例：**
@@ -356,6 +370,7 @@ obj
 任意对象
 
 **返回值：**
+
 所指定对象的所有自身属性的描述符，如果没有任何自身属性，则返回空对象。
 
 **实例：**
@@ -379,6 +394,7 @@ obj
 一个对象，其自身的可枚举和不可枚举属性的名称被返回。
 
 **返回值：**
+
 对应的字符串数组。
 
 **实例：**
@@ -408,6 +424,7 @@ elementN
 被添加到数组末尾的元素。
 
 **返回值：**
+
 当调用该方法时，新的 length 属性值将被返回。
 
 **实例：**
@@ -440,6 +457,7 @@ initialValue 可选
 作为第一次调用 callback 函数时参数 previousValue 的值。若指定了初始值 initialValue，则 currentValue 则将使用数组第一个元素；否则 previousValue 将使用数组第一个元素，而 currentValue 将使用数组第二个元素。
 
 **返回值：**
+
 使用 “reducer” 回调函数遍历整个数组后的结果。
 
 **实例：**
@@ -475,6 +493,7 @@ initialValue可选
 否则，在空数组上调用 reduce 或 reduceRight 且未提供初始值（例如 [].reduce( (acc, cur, idx, arr) => {} ) ）的话，会导致类型错误 TypeError: reduce of empty array with no initial value。
 
 **返回值：**
+
 执行之后的返回值。
 
 **实例：**
@@ -484,12 +503,16 @@ console.log(array1.reduceRight((pre, cur) => { return pre + cur }));//10
 ```
 ### 1.4 reverse() 
 方法将数组中元素的位置颠倒，并返回该数组。数组的第一个元素会变成最后一个，数组的最后一个元素变成第一个。该方法会改变原数组。
+
 **用法：**
+
 ```js
  arr.reverse()
 ```
 **返回值：**
+
 颠倒后的数组。
+
 **实例：**
 ```js
 let array1 = [1,2,3,4];
@@ -503,7 +526,9 @@ console.log(array1);//[ 4, 3, 2, 1 ]
 arr.shift()
 ```
 **返回值：**
+
 从数组中删除的元素; 如果数组为空则返回undefined 。
+
 **实例：**
 ```js
 let array1 = [1,2,3,4];
@@ -512,6 +537,7 @@ console.log(array1);// [2, 3, 4]
 ```
 ### 1.6 slice() 
 方法返回一个新的数组对象，这一对象是一个由 begin 和 end 决定的原数组的浅拷贝（包括 begin，不包括end）。原始数组不会被改变。
+
 **用法：**
 ```js
 arr.slice([begin[, end]])
@@ -520,8 +546,11 @@ begin 可选
 提取起始处的索引（从 0 开始），从该索引开始提取原数组元素。如果该参数为负数，则表示从原数组中的倒数第几个元素开始提取，slice(-2) 表示提取原数组中的倒数第二个元素到最后一个元素（包含最后一个元素）。如果省略 begin，则 slice 从索引 0 开始。如果 begin 超出原数组的索引范围，则会返回空数组。
 end 可选
 提取终止处的索引（从 0 开始），在该索引处结束提取原数组元素。slice 会提取原数组中索引从 begin 到 end 的所有元素（包含 begin，但不包含 end）。slice(1,4) 会提取原数组中从第二个元素开始一直到第四个元素的所有元素（索引为 1, 2, 3 的元素）。如果该参数为负数， 则它表示在原数组中的倒数第几个元素结束抽取。 slice(-2,-1) 表示抽取了原数组中的倒数第二个元素到最后一个元素（不包含最后一个元素，也就是只有倒数第二个元素）。如果 end 被省略，则 slice 会一直提取到原数组末尾。如果 end 大于数组的长度，slice 也会一直提取到原数组末尾。
+
 **返回值：**
+
 一个含有被提取元素的新数组。
+
 **实例：**
 ```js
 let array1 = [1,2,3,4];
@@ -534,6 +563,7 @@ console.log(array1);// [1, 2, 3, 4]
 ```
 ### 1.7 some() 
 方法测试数组中是不是至少有 1 个元素通过了被提供的函数测试。它返回的是一个 Boolean 类型的值。如果用一个空数组进行测试，在任何情况下它返回的都是false。
+
 **用法：**
 ```js
 arr.some(callback(element[, index[, array]])[, thisArg])
@@ -548,8 +578,11 @@ array可选
 some()被调用的数组。
 thisArg可选
 执行 callback 时使用的 this 值。
+
 **返回值：**
+
 数组中有至少一个元素通过回调函数的测试就会返回true；所有元素都没有通过回调函数的测试返回值才会为 false。
+
 **实例：**
 ```js
 let array1 = [1,2,3,4];
@@ -560,6 +593,7 @@ console.log(array1.some((item) => { return item > 5 }));// false
 方法用原地算法对数组的元素进行排序，并返回数组。默认排序顺序是在将元素转换为字符串，然后比较它们的 UTF-16 代码单元值序列时构建的
 
 由于它取决于具体实现，因此无法保证排序的时间和空间复杂性。 会改变原数组
+
 **用法：**
 ```js
 arr.sort([compareFunction])
@@ -570,8 +604,11 @@ firstEl
 第一个用于比较的元素。
 secondEl
 第二个用于比较的元素。
+
 **返回值：**
+
 排序后的数组。请注意，数组已原地排序，并且不进行复制。
+
 **实例：**
 ```js
 let array1 = [1,3,2,4];
@@ -582,6 +619,7 @@ console.log(array1);// [4, 3, 2, 1]
 ### 1.9 splice() 
 方法通过删除或替换现有元素或者原地添加新的元素来修改数组，并以数组形式返回被修改的内容。此方法会改变原数组。
 方法用于删除数组中的一部分，并返回被删除的元素。
+
 **用法：**
 ```js
 array.splice(start[, deleteCount[, item1[, item2[, ...]]]])
@@ -594,6 +632,7 @@ item1, item2, ... 可选
 要添加进数组的元素，从start 位置开始。如果不指定，则 splice() 将只删除数组元素
 
 **返回值：**
+
 由被删除的元素组成的一个数组。如果只删除了一个元素，则返回只包含一个元素的数组。如果没有删除元素，则返回空数组。
 
 **实例：**
@@ -616,7 +655,9 @@ options 可选
 一个可配置属性的对象，对于数字 Number.prototype.toLocaleString()，对于日期Date.prototype.toLocaleString().
 
 **返回值：**
+
 表示数组元素的字符串。
+
 **实例：**
 ```js
 let array1 = [1,3,2,4];
@@ -625,12 +666,15 @@ console.log(array1.toLocaleString());//1,3,2,4
 ```
 ### 1.11 toString() 
 返回一个字符串，表示指定的数组及其元素。
+
 **用法：**
 ```js
 arr.toString()
 ```
 **返回值：**
+
 一个表示指定的数组及其元素的字符串。
+
 **实例：**
 ```js
 let array1 = [1,3,2,4];
@@ -647,7 +691,9 @@ elementN
 要添加到数组开头的元素或多个元素。
 
 **返回值：**
+
 当一个对象调用该方法时，返回其 length 属性值。
+
 **实例：**
 ```js
 
@@ -657,12 +703,15 @@ console.log(array1);//[5, 1, 3, 2, 4]
 ```
 ### 1.13 values() 
 方法返回一个新的 Array Iterator 对象，该对象包含数组每个索引的值。
+
 **用法：**
 ```js
 arr.values()
 ```
 **返回值：**
+
 一个新的 Array 迭代对象。
+
 **实例：**
 ```js
 let array1 = [1,3,2,4];
@@ -676,6 +725,7 @@ leetcode 无重复字符的最长子串(滑块窗口解题)解题思路很重要
 ## 1.数组方法总结(中)
 ### 1.1 forEach()
 对数组的每个元素执行一次给定的函数。不会改变原数组，不可终止循环，可以通过抛出异常的方式终止异常。没有返回值。
+
 **用法：**
 ```js
 arr.forEach(callback(currentValue [, index [, array]])[, thisArg])
@@ -690,11 +740,21 @@ array 可选
 forEach() 方法正在操作的数组。
 thisArg 可选
 可选参数。当执行回调函数 callback 时，用作 this 的值。
+
 **返回值：**
 undefined。
 
 **实例：**
 ```js
+let array1 = [1,3,2,4];
+array1.forEach((item, index) => {
+    console.log(item, index);
+}
+);
+// 1 0
+// 3 1
+// 2 2
+// 4 3
 ```
 ### 1.2 from()
 方法对一个类似数组或可迭代对象创建一个新的，浅拷贝的数组实例。
@@ -709,10 +769,16 @@ mapFn 可选
 如果指定了该参数，新数组中的每个元素会执行该回调函数。
 thisArg 可选
 可选参数，执行回调函数 mapFn 时 this 对象。
+
 **返回值：**
+
 一个新的数组实例。
+
 **实例：**
 ```js
+console.log(Array.from('foo')); // ['f', 'o', 'o']
+
+console.log(Array.from([1, 2, 3], x => x + x)); // [2, 4, 6]
 ```
 <h3 id="includes_top"  > 1.3 includes() </h3>
 判断数组中是否包括一个指定的值，包括返回true不包括返回false。
@@ -725,7 +791,9 @@ valueToFind需要寻找的元素值。
 fromIndex （可选）默认值为0，选择的话表示从该索引开始查找，若为负数则会根据公式（arr.length+fromIndex）进行转换。
 
 **返回值：**
+
 返回true/false，正0和负0视为相等。
+
 **实例：**
 ```js
 let array = [1,2,3,4,5];
@@ -739,14 +807,18 @@ console.log(array.includes());// false
 可以看出如果不传参的话默认返回false
 <h3 id="indexOf_top"  > 1.4 indexOf() </h3>
 返回数组中对应元素的索引，若不存在则返回-1。不改变原数组。
+
 **用法：**
 ```js
 arr.indexOf(searchElement[, fromIndex])
 ```
 searchElement要寻找的元素
 fromIndex(可选)选择开始查找的索引，若为-1则表示从后向前查找，其他负数的话以此类推，不填则默认为0。
+
 **返回值：**
+
 首个被找到的元素在目录中的索引位置；若无则返回 -1
+
 **实例：**
 ```js
 let array = [1,2,3,4,5];
@@ -811,12 +883,15 @@ console.log(array1);// [1, 3, 2, 4]
 ```
 ### 1.9 keys()
 方法返回一个包含数组中每个索引键的Array Iterator对象。
+
 **用法：**
 ```js
 arr.keys()
 ```
 **返回值：**
+
 一个新的 Array 迭代器对象。
+
 **实例：**
 ```js
 let array1 = [1,3,2,4];
@@ -830,6 +905,7 @@ console.log(array1);// [1, 3, 2, 4]
 ```
 ### 1.10 lastIndexOf()
 方法返回指定元素（也即有效的 JavaScript 值或变量）在数组中的最后一个的索引，如果不存在则返回 -1。从数组的后面向前查找，从 fromIndex 处开始。
+
 **用法：**
 ```js
 arr.lastIndexOf(searchElement[, fromIndex])
@@ -842,7 +918,9 @@ fromIndex 可选
 数组中该元素最后一次出现的索引，如未找到返回-1。
 
 **返回值：**
+
 lastIndexOf 使用严格相等（strict equality，即 ===）比较 searchElement 和数组中的元素。
+
 **实例：**
 ```js
 let array1 = [1,3,2,4];
@@ -852,6 +930,7 @@ console.log(array1.lastIndexOf(3,3));//1
 ```
 ### 1.11 map()
  方法创建一个新数组，这个新数组由原数组中的每个元素都调用一次提供的函数后的返回值组成。
+ 
 **用法：**
 ```js
 var new_array = arr.map(function callback(currentValue[, index[, array]]) {
@@ -869,7 +948,9 @@ map 方法调用的数组。
 thisArg可选
 执行 callback 函数时值被用作this。
 **返回值：**
+
 一个由原数组每个元素执行回调函数的结果组成的新数组
+
 **实例：**
 ```js
 let array1 = [1,3,2,4];
@@ -879,6 +960,7 @@ console.log(array1);// [1, 3, 2, 4]
 ```
 ### 1.12 of()
 创建一个具有可变数量参数的新数组实例，而不考虑参数的数量或类型。
+
 **用法：**
 ```js
 Array.of(element0[, element1[, ...[, elementN]]])
@@ -887,7 +969,9 @@ elementN
 任意个参数，将按顺序成为返回数组中的元素。
 
 **返回值：**
+
 新的 Array 实例。
+
 **实例：**
 ```js
 Array.of(7);       // [7]
@@ -904,7 +988,9 @@ Array(1, 2, 3);    // [1, 2, 3]
 arr.pop()
 ```
 **返回值：**
+
 从数组中删除的元素（当数组为空时返回undefined）。
+
 **实例：**
 ```js
 let array1 = [1,3,2,4];
@@ -927,7 +1013,9 @@ at(index)
 ```
 index 表示数组中对应的整数可以为负数，若是不存在返回undefined，若是负数则默认从后往前查询。
 **返回值：**
+
 返回数组中索引对应的值。
+
 **实例：**
 ```js
 let array1 = [5, 12, 8, 130, 44];
@@ -971,7 +1059,9 @@ console.log(array1.concat(array2, array3, array4, [1, 2, 3]));// [5, 12, 8, 130
 arr.copyWithin(target[, start[, end]])
 ```
 **返回值：**
+
 改变后的数组。
+
 **实例：**
 ```js
 ```
@@ -983,6 +1073,7 @@ arr.entries()
 ```
 **返回值：**
 > 一个新的 Array 迭代器对象。Array Iterator是对象，它的原型（__proto__:Array Iterator）上有一个next方法，可用用于遍历迭代器取得原数组的 [key,value]。
+
 **实例：**
 ```js
 let array1 = ['a', 'b', 'c'];
@@ -1001,13 +1092,17 @@ console.log(iterator1.next());// {value: undefined, done: true}
 ```
 ### 1.5 every()
 检测数组中条件是否都符合条件。返回一个布尔值。如果为空数组则返回true，不改变原数组。
+
 **用法：**
 ```js
 arr.every(callback(element[, index[, array]])[, thisArg])
 ```
 callback为回调函数，里面包含的参数 element表示用于当前值，index（可选）当前值的索引，array（可选）表示调用的数组，thisArg（可选）执行方法时回调函数的callback的this值（可指定），如果不指定在非严格模式下是指向全局对象window，在严格模式下指向的是undefined。
+
 **返回值：**
+
 每一个都通过返回true（返回是[truthy](https://developer.mozilla.org/zh-CN/docs/Glossary/Truthy) 值），有一个不通过返回false
+
 **实例：**
 ```js
 let array = [1, 2, 3, 4, 5];
@@ -1030,13 +1125,17 @@ array1.every(function (currentValue, index, arr) {
 ```
 ### 1.6 fill()
 用一个值填充数组中的指定元素，可以指定开始和结束的索引，不包括结束索引。
+
 **用法：**
 ```js
 arr.fill(value[, start[, end]])
 ```
 value用来填充元素的值，start（可选）起始索引，默认值为 0，end（可选）终止索引，默认值为this.length（数组最够一个数索引+1=this.length），start若是负数则默认处理为atart+arr.length，end也是如此。
+
 **返回值：**
+
 修改后的数组
+
 **实例：**
 ```js
 // fill方法
@@ -1052,6 +1151,7 @@ console.log([0,0].map(() => new Array(3).fill(0)));//[Array(3), Array(3)]
 ```
 ### 1.7 filter()
 对数组中符合条件的元素进行筛选，会返回一个新数组。不改变原数组
+
 **用法：**
 ```js
 var newArray = arr.filter(callback(element[, index[, array]])[, thisArg])
@@ -1059,6 +1159,7 @@ var newArray = arr.filter(callback(element[, index[, array]])[, thisArg])
 callback回调函数。emement表示遍历的当前元素，index（可选）遍历当前元素的索引，array（可选）遍历数组本身，[thisArg]（可选）可用来修改callback的this指向。更every一样，this不知道默认指向全局对象window，严格模式下是undefine。
 
 **返回值：**
+
 返回满足条件的新数组，如果没有任何数组元素通过测试，则返回空数组。
 
 **实例：**
@@ -1080,7 +1181,9 @@ arr.find(callback[, thisArg])
 > callback在数组每一项上执行的函数，接收 3 个参数：element当前遍历到的元素。index可选当前遍历到的索引。array可选数组本身。thisArg可选执行回调时用作 this 的对象。
 
 **返回值：**
+
 返回符合条件的第一个值否则返回undefined
+
 **实例：**
 ```js
 let array = [1, 2, 3, 4, 5];
@@ -1093,13 +1196,17 @@ console.log(array.find((element) => element === 6));// undefined
 若找到一个元素的位置或者一个元素是否存在于数组中，请使用[includes](#includes_top)和[indexOf](#indexOf_top)。
 ### 1.9 findIndex()
 返回数组中满足条件的第一个元素的索引。若没有找到则返回-1。
+
 **用法：**
 ```js
 arr.findIndex(callback[, thisArg])
 ```
 参数的用法跟find一样
+
 **返回值：**
+
 返回对应的索引，否则返回-1.
+
 **实例：**
 ```js
 let array = [1, 2, 3, 4, 5];
@@ -1117,8 +1224,11 @@ console.log(array.findIndex((element) => element === 6));// -1
 arr.findLast(function(element, index, array) , thisArg)
 ```
 函数的三个参数依旧分别是，当前元素，对应索引，当前数组。
+
 **返回值：**
+
 返回满足条件的最大索引对应的值，否则返回undefined。
+
 **实例：**
 ```js
 let array = [1,2,3,4,5];
@@ -1130,13 +1240,17 @@ console.log(array.findLast((element) => element === 6));// undefined
 ```
 ### 1.11 findLastIndex()
 返回数组中满足条件的最后一个元素的索引，若没找到则返回undefined。不改变原数组。
+
 **用法：**
 ```js
 arr.findLastIndex(function(element, index, array) , thisArg)
 ```
 参数的含义跟findLast一样。
+
 **返回值：**
+
 返回满足条件的索引
+
 **实例：**
 ```js
 let array = [1,2,3,4,5];
@@ -1162,6 +1276,7 @@ var newArray = arr.flat([depth])
 depth（可选）指定要提取嵌套数组的结构深度，默认值为 1。
 
 **返回值：**
+
 一个包含将数组与子数组中所有元素的新数组。
 
 **实例：**
@@ -1177,6 +1292,7 @@ console.log(array2.flat(2));// [1, 2, 3, 4, 5, 1]
 ```
 ### 1.13 flatMap()
 flatMap() 方法首先使用映射函数映射每个元素，然后将结果压缩成一个新数组。它与 map 连着深度值为 1 的 flat 几乎相同，但 flatMap 通常在合并成一种方法的效率稍微高一些。
+
 **用法：**
 ```js
 var new_array = arr.flatMap(function callback(currentValue[, index[, array]]) {
@@ -1193,7 +1309,9 @@ array可选
 可选的。被调用的 map 数组
 thisArg可选
 可选的。执行 callback 函数时 使用的this 值。
+
 **返回值：**
+
 一个新的数组，其中每个元素都是回调函数的结果，并且结构深度 depth 值为 1。
 
 **实例：**
@@ -1209,6 +1327,7 @@ thisArg可选
 ## 1.字符串方法总结(下)
 ### 1.1 replace()
 指定字符串中目标替换成给定的值，如果第一个值传入的是字符串则只会替换第一个，正则表达式则按照标准替换。
+
 **用法：**
 ```js
 str.replace(regexp|substr, newSubStr|function)
@@ -1218,8 +1337,11 @@ substr 字符串，只会替换第一个目标元素。
 newSubStr 用来替换的字符串元素。
 function 用来替换的函数
 function 怎么传值可以参考这个[MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
+
 **返回值：**
+
 被替代的新字符串。
+
 **实例：**
 ```js
 let a = "abcdaabd";
@@ -1243,13 +1365,17 @@ console.log(str)//他今年22岁，她今年20岁，他的爸爸今年45岁，�
 
 ### 1.2 replaceAll()
 将指定字符串中目标全部替换成给定的值，如果正则表达式不是全局则会报错。
+
 **用法：**
 ```js
 const newStr = str.replaceAll(regexp|substr, newSubstr|function)
 ```
 参数含义跟replace一样。
+
 **返回值：**
+
 新的字符串
+
 **实例：**
 ```js
 let a = "abcdaabd";
@@ -1259,13 +1385,18 @@ console.log(a.replaceAll(/a/, 'ff' ));//报错
 ```
 ### 1.3 search()
 用正侧表达式去匹配字符串对应的值，并返回索引。
+
 **用法：**
+
 ```js
 str.search(regexp)
 ```
 regexp表示一个正则表达式对象。如果传入一个非正则表达式对象，则会使用 new RegExp(regexp) 隐式地将其转换为正则表达式对象。
+
 **返回值：**
+
 返回首次匹配项的索引，匹配不成功返回-1。
+
 **实例：**
 ```js
 let a  = "a Bcd";
@@ -1277,7 +1408,9 @@ search()对应正则表达式中的test()方法，match()对应正则表达式�
 search()返回第一个索引，match()返回捕获的迭代器。
 ### 1.4 slice()
 截取字符串的一部分，并返回一个新的字符串，不会对原字符串改动。
+
 **用法：**
+
 ```js
 str.slice(beginIndex[, endIndex])
 ```
@@ -1286,6 +1419,7 @@ beginIndex 开始匹配的索引，如果是负数则会根据公式（str.lengt
 endIndex **可选** 如果不选改参数，默认一直提取到字符串末尾，选择则提取到当前。若为负责则会跟begin一样加上字符串长度。
 
 **返回值：**
+
 返回一个被截取出来的的新字符串。
 
 **实例：**
@@ -1343,6 +1477,7 @@ searchString要搜索的子字符串。
 position **可选**要搜索的初始位置，默认为0。
 **返回值：**
 ture/false
+
 **实例：**
 ```js
 let a = "a Bcd";
@@ -1352,6 +1487,7 @@ console.log(a.startsWith("a bc"));//false
 ```
 ### 1.7 toLocaleLowerCase()
 将指定字符串转换为小写格式
+
 **用法：**
 ```js
 str.toLocaleLowerCase()
@@ -1359,8 +1495,11 @@ str.toLocaleLowerCase(locale)
 str.toLocaleLowerCase([locale, locale, ...])
 ```
 locale 为指定要转换成小写格式的特定语言区域。默认值是当前计算机的语言格式。
+
 **返回值：**
+
 转换成小写格式的新字符串。
+
 **实例：**
 ```js
 let a = "a Bcd";
@@ -1418,11 +1557,13 @@ console.log(c.toString());// 2
 ```
 ### 1.11 toUpperCase()
 将字符串转换为大写（如果调用该方法的值不是字符串类型会被强制转换）。
+
 **用法：**
 ```js
 str.toUpperCase()
 ```
 **返回值：**
+
 返回一个转化为大写的字符串，不改变原字符串。
 
 **实例：**
@@ -1458,13 +1599,16 @@ console.log(b.length);//5
 
 ### 1.13 trimEnd()
 也称之为trimRight()移除字符串的末尾空白字符串，不会直接修改原字符串，改名称标准叫法为trimEnd()，只是为了兼容性，还保留了trimRight()名称。
+
 **用法：**
 ```js
 str.trimEnd();
 str.trimRight();
 ```
 **返回值：**
+
 符合要求的新字符串。
+
 **实例：**
 ```js
 let a = "a Bcd    ";
@@ -1538,12 +1682,14 @@ console.log(a.at())//a
 **' '也是有意义的字符串，也占位。**
 ### 1.2 charAt()
 charAt() 方法从一个字符串中返回指定的字符。
+
 **用法：**
 ```js
 str.charAt(index)
 //index一个介于 0 和字符串长度减 1 之间的整数。(0~length-1) 如果没有提供索引，charAt() 将使用 0。
 ```
 **返回值：**
+
 存在就返回存在的对应字符串，不存在则返回空字符串。
 
 **实例：**
@@ -1572,6 +1718,7 @@ str.charCodeAt(index)
 //一个大于等于 `0`，小于字符串长度的整数。如果不是一个数值，则默认为 `0`。
 ```
 **返回值：**
+
 指定 index 处字符的 UTF-16 代码单元值的一个数字；如果 index 超出范围，charCodeAt() 返回 NaN
 
 **实例：**
@@ -1600,6 +1747,7 @@ str.codePointAt(pos)
 //pos 这个字符串中需要转码的元素的位置。
 ```
 **返回值：**
+
 返回值是在字符串中的给定索引的编码单元体现的数字，如果在索引处没找到元素则返回 undefined 。
 
 **实例：**
@@ -1636,7 +1784,9 @@ str.concat(str2, [, ...strN])
 // str 需要连接的字符串
 ```
 **返回值：**
+
 一个新的字符串，包含参数所提供的连接字符串
+
 **实例：**
 ```js
 let a = "a bcd";
@@ -1675,7 +1825,9 @@ str.endsWith(searchString[, length])
 length 可选作为 str 的长度。默认值为 str.length。
 ```
 **返回值：**
+
 如果传入的子字符串在搜索字符串的末尾则返回true；否则将返回 false。
+
 **实例：**
 ```js
 let a = "a bcd";
@@ -1710,6 +1862,7 @@ str.includes(searchString[, position])
 
 ```
 **返回值：**
+
 如果当前字符串包含被搜寻的字符串，就返回 true；否则返回 false。
 
 **实例：**
@@ -1749,6 +1902,7 @@ str.indexOf(searchValue [, fromIndex])
 a = 'abcd',a.length =4,索引为0-3，如果 fromIndex<0 那么默认会从0开始查找（相当于为空），如果fromIndex>=4 那么会从4开始查找则会返回-1。
 
 **返回值：**
+
 查找的字符串 searchValue 的第一次出现的索引，如果没有找到，则返回 -1。
 
 **实例：**
@@ -1906,6 +2060,7 @@ form可选四种 Unicode 正规形式（Unicode Normalization Form）`"NFC"`、`
 
 ### 1.13 padEnd() 
 方法会用一个字符串填充当前字符串（如果需要的话则重复填充），返回填充后达到指定长度的字符串。从当前字符串的末尾（右侧）开始填充。
+
 **用法：**
 ```js
 str.padEnd(targetLength [, padString])
@@ -1915,7 +2070,9 @@ str.padEnd(targetLength [, padString])
 > padString 可选 填充字符串。如果字符串太长，使填充后的字符串长度超过了目标长度，则只保留最左侧的部分，其他部分会被截断。此参数的缺省值为 " "（U+0020）。
 
 **返回值：**
+
 在原字符串末尾填充指定的填充字符串直到目标长度所形成的新字符串。
+
 **实例：**
 ```js
 let a = "aBcd";
@@ -1928,6 +2085,7 @@ console.log(a.padEnd(1));//  aBcd
 ```
 ### 1.14 padStart()
 法用另一个字符串填充当前字符串 (如果需要的话，会重复多次)，以便产生的字符串达到给定的长度。从当前字符串的左侧开始填充。
+
 **用法：**
 ```js
 str.padStart(targetLength [, padString])
@@ -1938,6 +2096,7 @@ str.padStart(targetLength [, padString])
 > 填充字符串。如果字符串太长，使填充后的字符串长度超过了目标长度，则只保留最左侧的部分，其他部分会被截断。此参数的默认值为 " "（U+0020）。
 
 **返回值：**
+
 在原字符串开头填充指定的填充字符串直到目标长度所形成的新字符串。
 
 **实例：**
@@ -1973,6 +2132,7 @@ String.raw`templateString`
 > 模板字符串，可包含占位符（${...}）。
 
 **返回值：**
+
 给定模板字符串的原始字符串。
 
 **实例：**
@@ -2007,6 +2167,7 @@ String.raw({
 可以看出 \n 转换会多出一个\这个要注意
 ### 1.16 repeat()
  构造并返回一个新字符串，该字符串包含被连接在一起的指定数量的字符串的副本(重复拼接当前字符串)。
+ 
 **用法：**
 ```js
 str.repeat(count)
@@ -3740,6 +3901,7 @@ performance 对象，提供浏览器内存占用、导航行为和时间统计�
 
 # 备注
 按照时间顺序倒叙排列，完结后按时间顺序正序排列方便查看知识点。
+
 
 
 
