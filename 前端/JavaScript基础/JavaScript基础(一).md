@@ -136,7 +136,7 @@ console.log(target6); // { a: 1, b: 2, c: 3 }
 ```
 待补充
 ### 1.5 entries()
-返回一个给定对象自身可枚举属性的键值对数组，其排列与使用 for...in 循环遍历该对象时返回的顺序一致（区别在于 for-in 循环还会枚举原型链中的属性）。
+返回一个给定对象自身可枚举属性的键值对数组，其排列与使用 for...in 循环遍历该对象时返回的顺序一致（区别在于 for-in 循环还会枚举原型链中的属性）。不改变原对象
 
 **用法：**
 ```js
@@ -151,9 +151,14 @@ let target7 = { a: 1, b: 2 };
 console.log(Object.entries(target7)); // [Array(2), Array(2)]0: (2) ['a', 1]1: (2) ['b', 2]length: 2[[Prototype]]: Array(0)
 console.log(Object.keys(target7)); // ['a', 'b']
 console.log(Object.values(target7));// [1, 2]
+
+let target10 = { a: 1, b: 2 };
+let entries = Object.entries(target10);
+console.log(entries); // [ ['a', 1], ['b', 2] ]
+console.log(target10);  // { a: 1, b: 2 }
 ```
 ### 1.6 freeze() 
-方法可以冻结一个对象。一个被冻结的对象再也不能被修改；冻结了一个对象则不能向这个对象添加新的属性，不能删除已有属性，不能修改该对象已有属性的可枚举性、可配置性、可写性，以及不能修改已有属性的值。此外，冻结一个对象后该对象的原型也不能被修改。freeze() 返回和传入的参数相同的对象。
+冻结一个对象，不能修改，不能添加新属性，不能删除已有属性，不能修改该对象已有属性的可枚举性、可配置性、可写性，以及不能修改已有属性的值，冻结后对象的原型也不能修改。
 
 **用法：**
 ```js
@@ -168,48 +173,105 @@ obj
 ```js
 let target8 = { a: 1, b: 2 };
  Object.freeze(target8);
-    target8.a = 3;
-    console.log(target8); // { a: 1, b: 2 }
+ target8.a = 3;
+ console.log(target8); // { a: 1, b: 2 }
+ let target9 =[1,23,4,5,6,7,8,9,10];
+Object.freeze(target9);
+target9.push(11);
+console.log(target9);   // [1, 23, 4, 5, 6, 7, 8, 9, 10, 11]
+// TypeError: Cannot add property 9, object is not extensible
 ```
-### 1.7
+### 1.7 fromEntries() 
+把键值对列表转换为一个对象。不改变原键值对列表而是生成一个新对象。
+
+**用法：**
+```js
+Object.fromEntries(iterable);
+```
+iterable类似 Array 、 Map 或者其它实现了可迭代协议的可迭代对象。
+
+**返回值：**
+一个由该迭代对象条目提供对应属性的新对象。
+实例：
+```js
+let target10 = { a: 1, b: 2 };
+let entries = Object.entries(target10);
+console.log(entries); // [ ['a', 1], ['b', 2] ]
+Object.fromEntries(entries);
+console.log(target10); // { a: 1, b: 2 }
+
+//Map转换为对象
+let map = new Map([['a', 1], ['b', 2]]);
+console.log(Object.fromEntries(map)); // { a: 1, b: 2 }
+```
+### 1.8 getOwnPropertyDescriptor() 
+方法返回指定对象上一个自有属性对应的属性描述符。（自有属性指的是直接赋予该对象的属性，不需要从原型链上进行查找的属性）
+
+**用法：**
+```js
+Object.getOwnPropertyDescriptor(obj, prop)
+```
+obj需要查找的目标对象
+prop目标对象内属性名称
+
+**返回值：**
+如果指定的属性存在于对象上，则返回其属性描述符对象（property descriptor），否则返回 undefined。
+
+**实例：**
+```js
+let target11 = { a: 1, b: 2 };
+let d = Object.getOwnPropertyDescriptor( target11, 'a' );
+console.log(d);  // { value: 1, writable: true, enumerable: true, configurable: true }
+let f = Object.getOwnPropertyDescriptor(target11 , 'c');
+console.log(f); // undefined
+```
+### 1.9 getOwnPropertyDescriptors() 
+方法用来获取一个对象的所有自身属性的描述符。
 用法：
 
 ```js
+Object.getOwnPropertyDescriptors(obj)
 ```
-返回值：
+obj
+任意对象
 
+**返回值：**
+所指定对象的所有自身属性的描述符，如果没有任何自身属性，则返回空对象。
+
+**实例：**
+```js
+let target12 = { a: 1, b: 2 };
+let d = Object.getOwnPropertyDescriptors( target12 );
+console.log(d); // { a: { value: 1, writable: true, enumerable: true, configurable: true }, b: { value: 2, writable: true, enumerable: true, configurable: true } }
+
+let target13 = {};
+let d2 = Object.getOwnPropertyDescriptors( target13 );
+console.log(d2); // {}
+```
+### 1.10 getOwnPropertyNames()
+方法返回一个由指定对象的所有自身属性的属性名（包括不可枚举属性但不包括 Symbol 值作为名称的属性）组成的数组。
+
+**用法：**
+```js
+Object.getOwnPropertyNames(obj)
+```
+obj
+一个对象，其自身的可枚举和不可枚举属性的名称被返回。
+
+**返回值：**
+对应的字符串数组。
 实例：
 ```js
-```
-### 1.8
-用法：
-
-```js
-```
-返回值：
-
-实例：
-```js
-```
-### 1.9
-用法：
-
-```js
-```
-返回值：
-
-实例：
-```js
-```
-### 1.10
-用法：
-
-```js
-```
-返回值：
-
-实例：
-```js
+let target14 = { a: 1, b: 2 };
+Object.getOwnPropertyNames(target14).forEach(function(key) {
+//['a','b']
+    console.log(key);
+});
+// a b
+let target15 = { a: 1, b: 2 };
+ let b =Object.getOwnPropertyNames(target15)
+    console.log(b); // [ 'a', 'b' ]
+VM10599:3 (2) ['a', 'b']
 ```
 
 # Day10【2022年8月1日】 
@@ -240,6 +302,8 @@ console.log(Array.prototype.push.apply(array1, array2));// 9
  方法对数组中的每个元素按序执行一个由您提供的 reducer 函数，每一次运行 reducer 会将先前元素的计算结果作为参数传入，最后将其结果汇总为单个返回值。
 
 第一次执行回调函数时，不存在“上一次的计算结果”。如果需要回调函数从数组索引为 0 的元素开始执行，则需要传递初始值。否则，数组索引为 0 的元素将被作为初始值 initialValue，迭代器将从第二个元素开始执行（索引为 1 而不是 0）。
+**reducer** 逐个遍历数组元素，每一步都将当前元素的值与上一步的计算结果相加（上一步的计算结果是当前元素之前所有元素的总和）——直到没有更多的元素被相加。
+
 **用法：**
 ```js
 reduce(function(previousValue, currentValue, currentIndex, array) { /* ... */ }, initialValue)
@@ -256,6 +320,7 @@ initialValue 可选
 
 **返回值：**
 使用 “reducer” 回调函数遍历整个数组后的结果。
+
 **实例：**
 ```js
 let array1 = [1,2,3,4];
