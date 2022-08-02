@@ -10,11 +10,15 @@ highlight: tomorrow
 可能有人会疑惑了，我一个干前端的学习什么后端，一个搞后端的学什么前端。从事前端的小伙伴学习了后端不一定要从事后端，后端学习了前端不一定要从事后端。但是想要晋升管理是要求综合技能过关，这样才能即管的了后端又管的了前端。那可能又有小伙伴疑问为什么要学习产品运营，可以这么说，不懂产品的程序员不是一个好的程序员，产品在我们日常开发中时时刻刻都在。前端后端都会了+产品运营这样就可以晋升产品+研发+运营的高级管理。下来我们回归到技术，技术就像习武之人的基本功，只有基本功扎实，才有能力去练降龙十八掌、罗汉拳这些武功。让我们一起努力练功升级把！💪💪💪
 
 这里同步会更慢一些，实时更新可以到我[github](https://github.com/xiaoniuge36/ng-learning-for-1024-days)（二者同步）
+# Day11【2022年8月3日】 
+**学习重点：** 总结js基本对象Object常用方法（中）
+## 1.Object方法总结（中）
 # Day10【2022年8月2日】 
 **学习重点：** 总结js基本对象Object常用方法（上）
 ## 1.Object方法总结（上）
 ### 1.1 assign()
 Object.assign() 方法将所有可枚举（Object.propertyIsEnumerable() 返回 true）和自有（Object.hasOwnProperty() 返回 true）属性从一个或多个源对象复制到目标对象，返回修改后的对象。是浅拷贝的一种。对象是null或undefined时不会报错。如果目标对象与与源对象有相同的key，则源对象会覆盖目标对象。
+
 **用法：**
 ```js
 Object.assign(target, ...sources)
@@ -43,16 +47,42 @@ console.log(target2); // { a: 1, b: 2 }
 console.log(returnedTarget2); // { a: 1, b: 2 }
 ```
 ### 1.2 create()
-方法创建一个新对象，使用现有的对象作为新创建对象的原型（原型）。浅拷贝。
-用法：
+方法创建一个新对象，使用现有的对象作为新创建对象的原型（prototype）。浅拷贝。
 
+**用法：**
 ```js 
+Object.create(proto)
+Object.create(proto, propertiesObject)
 ```
-返回值：
+proto新创建对象的原型对象。
+propertiesObject 可选
+如果该参数被指定且不为 undefined，则该传入对象的自有可枚举属性（即其自身定义的属性，而不是其原型链上的枚举属性）将为新创建的对象添加指定的属性值和对应的属性描述符。这些属性对应于 Object.defineProperties() 的第二个参数。
+proto 参数需为
+null 或
+除基本类型包装对象以外的对象
+如果 proto 不是这几类值，则抛出一个 TypeError 异常。
+**返回值：**
 
-实例：
+一个新对象，带着指定的原型对象及其属性。
+
+**实例：**
 ```js
+const person = {
+  isHuman: false,
+  printIntroduction: function() {
+    console.log(`My name is ${this.name}. Am I human? ${this.isHuman}`);
+  }
+};
+
+const me = Object.create(person);
+
+me.name = 'Matthew'; // "name" is a property set on "me", but not on "person"
+me.isHuman = true; // inherited properties can be overwritten
+
+me.printIntroduction();
+// expected output: "My name is Matthew. Am I human? true"
 ```
+
 ### 1.3 defineProperties() 
 在一个对象上定义新的属性或修改现有属性，并返回该对象。可同时修改多个。
 
@@ -260,7 +290,8 @@ obj
 
 **返回值：**
 对应的字符串数组。
-实例：
+
+**实例：**
 ```js
 let target14 = { a: 1, b: 2 };
 Object.getOwnPropertyNames(target14).forEach(function(key) {
@@ -819,13 +850,17 @@ console.log(array1.at(5));// undefined
 ```
 ### 1.2 concat()
 合并两个或者多个数组，返回一个新数组，该方法不改变原数组。
+
 **用法：**
 ```js
 var new_array = old_array.concat(value1[, value2[, ...[, valueN]]])
 ```
 valueN是可选
+
 **返回值：**
+
 返回新数组，不会改变this，返回的是浅拷贝。
+
 **实例：**
 ```js
 let array1 = [5, 12, 8, 130, 44];
@@ -1276,8 +1311,11 @@ console.log(a);//a bcd
 ```js
 toString()
 ```
+
 **返回值：**
+
 String 包装对象的字符串值。
+
 **实例：**
 ```
 let a = "abc";
