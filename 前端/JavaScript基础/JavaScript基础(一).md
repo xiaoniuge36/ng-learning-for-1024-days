@@ -14,94 +14,295 @@ highlight: tomorrow
 **学习重点：** 总结js基本对象Object常用方法（中）
 ## 1.Object方法总结（中）
 ### 1.1 getOwnPropertySymbols()
-**学习重点：**
-```js
-```
+返回一个给定对象自身的所有 Symbol 属性的数组。若对象没有smbol则返回空数组。
 **用法：**
+```js
+Object.getOwnPropertySymbols(obj)
+```
+obj要返回 Symbol 属性的对象。
+
+**返回值：**
+
+在给定对象自身上找到的所有 Symbol 属性的数组。
 
 **实例：**
 ```js 
+let a = {};
+
+Object.getOwnPropertySymbols(a);//[]
+
+let b = {a:1};
+
+Object.getOwnPropertySymbols(b);//[]
+
+var obj = {};
+var a = Symbol("a");
+var b = Symbol.for("b");
+
+obj[a] = "localSymbol";
+obj[b] = "globalSymbol";
+
+var objectSymbols = Object.getOwnPropertySymbols(obj);
+
+console.log(obj); // {a: "localSymbol", Symbol(b): "globalSymbol"}
+console.log(objectSymbols.length); // 2
+console.log(objectSymbols)         // [Symbol(a), Symbol(b)]
+console.log(objectSymbols[0])      // Symbol(a) 
+
 ```
 ### 1.2 getPrototypeOf()
-**学习重点：**
-```js
-```
+> 返回指定对象的原型（内部`[[Prototype]]`属性的值）。
 **用法：**
+```js
+Object.getPrototypeOf(object)
+```
+object要返回原型的对象。
+
+**返回值：**
+
+给定对象的则原型。如果没有继承属性，返回null。
 
 **实例：**
 ```js
+let a = {a:1};
+let b = Object.create(a);
+console.log(a); // {a: 1}
+console.log(b); // {} 在原型链上没有a属性，但是在Object.create(a)上有a属性 Object.create(a)是a的一个实例 因此b也有a属性
+console.log(b.a); // 1
+console.log(Object.getPrototypeOf(b) === a); // true
+
+
 ```
 ### 1.3 hasOwn()
-**学习重点：**
-```js
-```
+> 如果指定的对象具有指定的属性作为其自己的Object.hasOwn()属性，则静态方法返回。如果属性被继承或不存在，则该方法返回。 truefalse。
+判断对象中是否具有某个属性用来替代Object.hasOwnProperty().
+方法返回`true`— 即使属性值为`null`or `undefined`
 **用法：**
+```js
+hasOwn(instance, prop)
+```
+instance要测试的对象实例。
+prop要测试的属性的String名称或符号
 
+**返回值：**
+如果指定的对象直接定义了指定的属性true。否则false
 **实例：**
 ```js
+let obj = { a:0, b:1,c:null,d:undefined };
+Object.hasOwn(obj, "a"); // true
+Object.hasOwn(obj, "b"); // true
+Object.hasOwn(obj, "c"); // true
+Object.hasOwn(obj, "d"); // true
+Object.hasOwn(obj, "e"); // false
+
 ```
 ### 1.4 hasOwnProperty()
-**学习重点：**
-```js
-```
+返回一个布尔值，指示对象是否具有指定的属性作为它自己的属性（而不是继承它）。
 **用法：**
+```js
+hasOwnProperty(prop)
+```
+prop要测试的属性的String名称或符号。
+
+**返回值：**
+
+true如果对象具有指定的属性作为自己的属性，则 返回；false 否则。
 
 **实例：**
 ```js
+let obj1 = {a:2 ,b:1};
+
+obj1.hasOwnProperty('a'); // true
+obj1.hasOwnProperty('b'); // true
+obj1.hasOwnProperty('c'); // false
 ```
+回看总结一下二者的区别。
+for in可以查看原型上是否有该属性，而该方法只可查看自身属性，不包括原型
 ### 1.5 is()
-**学习重点：**
-```js
-```
+确定两个值是否 相同。
 **用法：**
-
+```js
+Object.is(value1, value2);
+```
+value1比较的第一个值
+value2比较的第二个值
+**返回值：**
+true/false
 **实例：**
 ```js
+// Case 1: Evaluation result is the same as using ===
+Object.is(25, 25);                // true
+Object.is('foo', 'foo');          // true
+Object.is('foo', 'bar');          // false
+Object.is(null, null);            // true
+Object.is(undefined, undefined);  // true
+Object.is(window, window);        // true
+Object.is([], []);                // false
+const foo = { a: 1 };
+const bar = { a: 1 };
+Object.is(foo, foo);              // true
+Object.is(foo, bar);              // false
+
+// Case 2: Signed zero
+Object.is(0, -0);                 // false
+Object.is(+0, -0);                // false
+Object.is(-0, -0);                // true
+Object.is(0n, -0n);               // true
+
+// Case 3: NaN
+Object.is(NaN, 0/0);              // true
+Object.is(NaN, Number.NaN)        // true
+
+"" == false//true
+Object.is("",false)//false
 ```
+以下表示相等：（与==和===都不相同）
+两个都undefined
+两个都null
+两者true或两者false
+两个字符串长度相同，字符顺序相同
+都是同一个对象（意味着两个值都引用内存中的同一个对象）
+两个数字和
+两个都+0
+两个都-0
+两个都NaN
+或两者都非零且都非零且NaN两者具有相同的值
+
+> 与==不相同。运算符在 `==`测试相等性之前对双方应用各种强制（如果它们不是相同的类型）（导致诸如 be 的行为 `"" == false`）`true`，但`Object.is`不会强制任何一个值。
+> 
+> yu===不相同。`Object.is()`和之间的唯一区别在于`===`它们对有符号零和 NaN 的处理。例如，`===` 运算符（和`==`运算符）将数值`-0` 和`+0`视为相等。此外，`===`运算符将 [`Number.NaN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN)和[`NaN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN)视为不相等。
 ### 1.6 isExtensible()
-**学习重点：**
-```js
-```
+确定对象是否可扩展（是否可以添加新属性）。
 **用法：**
-
+```js
+Object.isExtensible(obj)
+```
+**返回值：**
+true/false
 **实例：**
 ```js
+let empty = {};
+Object.isExtensible(empty); // === true
+
+Object.preventExtensions(empty);
+Object.isExtensible(empty); // === false
+
+
+let sealed = Object.seal({});
+Object.isExtensible(sealed); // === false
+
+
+let frozen = Object.freeze({});
+Object.isExtensible(frozen); // === false
+
+let obj = {a:1,b:2};
+Object.isExtensible(obj); // === true
+
 ```
+默认情况下，对象是可扩展的：它们可以添加新属性，并且[[Prototype]]可以重新分配它们。Object.preventExtensions()可以使用、Object.seal()、Object.freeze()或之一将对象标记为不可扩展Reflect.preventExtensions()（Reflect反射）。
 ### 1.7 isFrozen()
-**学习重点：**
-```js
-```
+对象是否被冻结。
 **用法：**
-
+```js
+Object.isFrozen(obj)
+```
+**返回值：**
+true/false
 **实例：**
 ```js
+let obj1 = {a:1,b:2};
+Object.isFrozen(obj1); // === false
+
+let obj2 = Object.freeze({a:1,b:2});
+Object.isFrozen(obj2); // === true
+
+let obj3 = Object.seal({a:1,b:2});
+Object.isFrozen(obj3); // === true
+
+let obj4 = Object.preventExtensions({a:1,b:2});
+Object.isFrozen(obj4); // === true
+
+let obj5 = Object.defineProperty({a:1,b:2},'c',{value:3});
+Object.isFrozen(obj5); // ===  false  因为它没有被冻结
+
+let obj6 = Object.defineProperty({a:1,b:2},'c',{value:3,writable:false});
+Object.isFrozen(obj6); // === false 因为它没有被冻结
+
 ```
 ### 1.8 isPrototypeOf()
-**学习重点：**
-```js
-```
+检查一个对象是否存在于另一个对象的原型链中。
 **用法：**
-
+```js
+isPrototypeOf(object)
+```
+**返回值：**
+true/false
 **实例：**
 ```js
+function Foo() {}
+function Bar() {}
+function Baz() {}
+
+Bar.prototype = Object.create(Foo.prototype);
+Baz.prototype = Object.create(Bar.prototype);
+
+const foo = new Foo();
+const bar = new Bar();
+const baz = new Baz();
+
+// prototype chains:
+// foo: Foo <- Object
+// bar: Bar <- Foo <- Object
+// baz: Baz <- Bar <- Foo <- Object
+console.log(Baz.prototype.isPrototypeOf(baz));    // true
+console.log(Baz.prototype.isPrototypeOf(bar));    // false
+console.log(Baz.prototype.isPrototypeOf(foo));    // false
+console.log(Bar.prototype.isPrototypeOf(baz));    // true
+console.log(Bar.prototype.isPrototypeOf(foo));    // false
+console.log(Foo.prototype.isPrototypeOf(baz));    // true
+console.log(Foo.prototype.isPrototypeOf(bar));    // true
+console.log(Object.prototype.isPrototypeOf(baz)); // true
+
 ```
 ### 1.9 isSealed()
-**学习重点：**
-```js
-```
+确定对象是否被密封。如果一个对象是不可扩展的，并且它的所有属性都是不可配置的，因此是不可移除的（但不一定是不可写的），那么它就是密封的。（要求更少）
 **用法：**
+```js
+Object.isSealed(obj)
+```
+**返回值：**
+
+true/false
 
 **实例：**
 ```js
+let obj1 = {a:1,b:2};
+Object.isSealed(obj1); // === false
+
+let obj2 = Object.seal({a:1,b:2});
+Object.isSealed(obj2); // === true
+
+let obj3 = Object.freeze({a:1,b:2});
+Object.isFrozen(obj3); // === true
+
+let obj4 = Object.preventExtensions({a:1,b:2});
+Object.isExtensible(obj4); // === false
+
+let obj5 = Object.defineProperty({a:1,b:2},'c',{value:3});
+Object.isExtensible(obj5); // === true
 ```
 ### 1.10 keys()
-**学习重点：**
-```js
-```
+返回给定对象自己的可枚举属性名称Object.keys()的数组，以与正常循环相同的顺序进行迭代。
 **用法：**
-
+```js
+Object.keys(obj)
+```
+**返回值：**
+表示给定对象的所有可枚举属性的字符串数组。
 **实例：**
 ```js
+let obj1 = {a:1,b:2};
+Object.keys(obj1); // ['a', 'b']
 ```
 # Day10【2022年8月2日】 
 **学习重点：** 总结js基本对象Object常用方法（上）
