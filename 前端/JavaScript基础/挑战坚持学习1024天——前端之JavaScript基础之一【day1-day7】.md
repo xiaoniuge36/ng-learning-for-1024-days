@@ -9,13 +9,13 @@ highlight: tomorrow
 
 可能有人会疑惑了，我一个干前端的学习什么后端，一个搞后端的学什么前端。从事前端的小伙伴学习了后端不一定要从事后端，后端学习了前端不一定要从事后端。但是想要晋升管理是要求综合技能过关，这样才能即管的了后端又管的了前端。那可能又有小伙伴疑问为什么要学习产品运营，可以这么说，不懂产品的程序员不是一个好的程序员，产品在我们日常开发中时时刻刻都在。前端后端都会了+产品运营这样就可以晋升产品+研发+运营的高级管理。下来我们回归到技术，技术就像习武之人的基本功，只有基本功扎实，才有能力去练降龙十八掌、罗汉拳这些武功。让我们一起努力练功升级把！💪💪💪
 
-这里同步会更慢一些，实时更新可以到我[github](https://github.com/xiaoniuge36/ng-learning-for-1024-days)（二者同步）
+实时同步更新可以到我[github](https://github.com/xiaoniuge36/ng-learning-for-1024-days)（这里shaw）
 # Day1【2022年7月23日】
 **学习重点**：回顾前端基础知识，复习JavaScript基础之回顾JS组成（ECMAScript、DOM、BOM）。
 ## 1.前端技术回顾
 
 
-在前端有我们熟悉的三架马车HTML+CSS+JavaScript引用维基百科中的解释。
+在前端有我们熟悉的三架马车HTML+CSS+JavaScript
 
 HTML
 > 超**文本标记语言**或**HTML是设计用于在**[Web 浏览器](https://en.wikipedia.org/wiki/Web_browser "Web browser")中显示的文档的标准[标记语言](https://en.wikipedia.org/wiki/Markup_language "标记语言")。它可以通过[级联样式表](https://en.wikipedia.org/wiki/Cascading_Style_Sheets "Cascading Style Sheets")(CSS) 等技术和 JavaScript 等脚本[语言](https://en.wikipedia.org/wiki/JavaScript "JavaScript")[来](https://en.wikipedia.org/wiki/Scripting_language "Scripting language")辅助。[](https://en.wikipedia.org/wiki/Web_browser "网页浏览器")[](https://en.wikipedia.org/wiki/Cascading_Style_Sheets "层叠样式表")[](https://en.wikipedia.org/wiki/Scripting_language "脚本语言")[](https://en.wikipedia.org/wiki/JavaScript "JavaScript")
@@ -34,7 +34,7 @@ JavaScript
 完整的JavaScript由ECMAScript（核心）、文档对象模型（DOM）、浏览器对象模型（BOM）三者组成，三者是并列关系。
 ### 2.1ECMAScript
 
-> **ECMAScript**是一种由[Ecma国际](https://zh.wikipedia.org/wiki/Ecma%E5%9B%BD%E9%99%85 "Ecma国际")（前身为[欧洲计算机制造商协会](https://zh.wikipedia.org/wiki/%E6%AC%A7%E6%B4%B2%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%88%B6%E9%80%A0%E5%95%86%E5%8D%8F%E4%BC%9A "欧洲计算机制造商协会")）在标准ECMA-262中定义的[脚本语言](https://zh.wikipedia.org/wiki/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80 "脚本语言")规范。这种语言在[万维网](https://zh.wikipedia.org/wiki/%E4%B8%87%E7%BB%B4%E7%BD%91 "万维网")上应用广泛，它往往被称为[JavaScript](https://zh.wikipedia.org/wiki/JavaScript "JavaScript")或[JScript](https://zh.wikipedia.org/wiki/JScript "JScript")，但实际上后两者是ECMA-262标准的实现和扩展。 ————维基百科 
+> **ECMAScript**是一种由[Ecma国际](https://zh.wikipedia.org/wiki/Ecma%E5%9B%BD%E9%99%85 "Ecma国际")（前身为[欧洲计算机制造商协会](https://zh.wikipedia.org/wiki/%E6%AC%A7%E6%B4%B2%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%88%B6%E9%80%A0%E5%95%86%E5%8D%8F%E4%BC%9A "欧洲计算机制造商协会")）在标准ECMA-262中定义的[脚本语言](https://zh.wikipedia.org/wiki/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80 "脚本语言")规范。这种语言在[万维网](https://zh.wikipedia.org/wiki/%E4%B8%87%E7%BB%B4%E7%BD%91 "万维网")上应用广泛，它往往被称为[JavaScript](https://zh.wikipedia.org/wiki/JavaScript "JavaScript")或[JScript](https://zh.wikipedia.org/wiki/JScript "JScript")，但实际上后两者是ECMA-262标准的实现和扩展。
 
 ECMAScript每年都会更新JavaScript基于ECMAScript，而且每年都会更新标准。
 最新标准于今年六月更新引用了Top-level Await,Object.hasOwn(),at(),error.case,正则表达式匹配人索引，类等新特性。
@@ -55,17 +55,20 @@ DOM,是一种树形结构，DOM 通过创建表示文档的树，可以随心所
 
 #### 2.2.1document(文档)和element(元素)的关系
 Document
-> **`Document`** 接口表示任何在浏览器中载入的网页，并作为网页内容的入口，也就是[DOM 树](https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Using_the_W3C_DOM_Level_1_Core)。DOM 树包含了像 [`<body>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/body) 、[`<table>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/table) 这样的元素，以及[大量其他元素](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element)。它向网页文档本身提供了全局操作功能，能解决如何获取页面的 URL ，如何在文档中创建一个新的元素这样的问题。---MDN
+> **`Document`** 接口表示任何在浏览器中载入的网页，并作为网页内容的入口，也就是[DOM 树](https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Using_the_W3C_DOM_Level_1_Core)。DOM 树包含了像 [`<body>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/body) 、[`<table>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/table) 这样的元素，以及[大量其他元素](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element)。它向网页文档本身提供了全局操作功能，能解决如何获取页面的 URL ，如何在文档中创建一个新的元素这样的问题。---MDN。
+
+在浏览器中，文档对象 document 是HTMLDocument 的实例（HTMLDocument 继承 Document），表示整个 HTML 页面。document 是 window对象的属性，因此是一个全局对象。一般来说，appendChild()、removeChild()和 replaceChild()方法不会用在 document 对象上。这是因为文档类型（如果存在）是只读的，而且只能有一个 Element 类型的子节点（即<html>，已经存在了）
+
 
 Element
 
 > **Element** 是一个通用性非常强的基类，所有 [Document](https://developer.mozilla.org/zh-CN/docs/Web/API/Document) 对象下的对象都继承自它。这个接口描述了所有相同种类的元素所普遍具有的方法和属性。`element` 对象实现了 DOM `Element` 接口以及更基本的 `Node` 接口
-
+ 
+Element 类型就是Web开发中最常用的类型了。Element 表示XML或HTML元素，对外暴露出访问元素标签名、子节点和属性的能力。 
 Document和Element*都继承自它的祖先接口 [Node](https://developer.mozilla.org/zh-CN/docs/Web/API/Node)*
 
 ```js
 var element = document.createElement(tagName[, options]);
-
 ```
 
 ####  2.2.2总结常用的一些dom操作
@@ -87,6 +90,12 @@ element.setAttribute();
 //要获取属性的当前值
 element.getAttribute();
 ```
+
+**`Element.innerHTML`** 属性设置或获取 HTML 语法表示的元素的后代。
+如果要向一个元素中插入一段 HTML，而不是替换它的内容，那么请使用 [`insertAdjacentHTML()`](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/insertAdjacentHTML "insertAdjacentHTML()") 方法。[`DOMString`](https://developer.mozilla.org/zh-CN/docs/conflicting/Web/JavaScript/Reference/Global_Objects/String_6fa58bba0570d663099f0ae7ae8883ab) 包含元素后代的 HTML 序列。设置元素的 `innerHTML` 将会删除所有该元素的后代并以上面给出的 htmlString 替代。
+    
+简单来说document是对文档/元素进行获取，只能获取不能修改，而element则对获取的元素/标签标签进行修改。
+
 #### 2.2.3getElementById和querySelector区别
 1.querySelector是按css规范来实现的，它传入的字符串中第一个字符不能是数字。
 2.query选择符选出来的元素及元素数组是静态的，而getElement这种方法选出的元素是动态的。静态的就是说选出的所有元素的数组，不会随着文档操作而改变。在使用的时候getElement这种方法性能比较好，query选择符则比较方便。
@@ -360,10 +369,35 @@ var result = condition ? value1 : value2;
 
 **总结：一个或运算 || 的链，将返回第一个真值，如果不存在真值，就返回该链的最后一个值。**
 
+**补充：** 
+**如果||运算符与非布尔值一起使用，它将返回一个非布尔值。（忽略，不理解，有歧义）**
+```js
+console.log(true || null); // true
+console.log(true || undefined); // true
+console.log(true || 1); // true
+console.log(true || ''); // true
+console.log(false || ''); // ''
+console.log(false || 'hello'); // 'hello'
+console.log('hello' || false); // 'hello'
+console.log('' || false); // false
+console.log(true || "hello"); // true
+console.log("hello" || true); // true
+console.log(true || false); // true
+console.log(true || true); // true
+console.log('test' || 'hello'); // 'test'
+console.log(null || 'hello'); // 'hello'
+console.log(undefined || 'hello'); // 'hello'
+console.log(1 || 'hello'); // 1
+console.log('' || 'hello'); // 'hello'
+console.log(false || 'hello'); // 'hello'
+console.log([] ||false ); // []
+console.log({} || false); // {}
+```
 ##### 1.4.1.5&&运算符本质：
 
 ![1e7d83bc5493c0c5b75805797fb8d1a.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/da1735e477ba4526bbe4745c1b92dc72~tplv-k3u1fbpfcp-watermark.image?)
 
+<img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/add2f7d267724f479761058b43560719~tplv-k3u1fbpfcp-watermark.image?" alt="1659599075900.png" width="50%" />
 从左到右依次计算操作数。
 
 在处理每一个操作数时，都将其转化为布尔值（Boolean）；
@@ -372,9 +406,70 @@ var result = condition ? value1 : value2;
 
 如果所有的操作数都被计算过（例如都是真值），则返回最后一个操作数。
 
-**总结：与运算 返回第一个假值，如果没有假值就返回最后一个值。**
+**总结：与运算返回第一个假值，如果没有假值就返回最后一个值。**
 
+**补充：** 
+可以转换为 false 的表达式示例如下：
 
+false;
+
+null;
+
+NaN;
+
+0;
+
+空字符串（""或''或``）；
+
+undefined.
+
+**举例：**
+```js
+console.log(true && null); // null
+console.log(true && undefined); // undefined
+console.log(true && 1); // 1
+console.log(true && ''); // ''
+console.log(false && ''); // false
+console.log(false && 'hello'); // false
+console.log('hello' && false); // false
+console.log('' && false); // ''
+console.log(true && "hello"); // "hello"
+console.log("hello" && true); // true
+console.log(true && false); // false
+console.log(true && true); // true 
+console.log('test' && 'hello'); // hello
+console.log(null && 'hello'); // null
+console.log(undefined && 'hello'); // undefined
+console.log(1 && 'hello'); // hello
+console.log('' && 'hello'); // ''
+console.log(false && 'hello'); // false 
+```
+**优先级：**
+数字越大优先级越高，说明&&的优先级大于||
+<img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7380c8413fcd4a409f70e7c0b6d060b2~tplv-k3u1fbpfcp-watermark.image?" alt="1659597163861.png" width="70%" />
+```js
+// &&优先级高于|| 
+//&& 返回第一个假值 都为真返回最后一个值
+//|| 返回第一个为真的值 如果都为假则返回最后一个值
+let a = 1;
+let b = 2;
+let c = a && b; // 2
+let y = a || b; // 1
+console.log(c); // 2
+let d = a || b;
+console.log(d); // 1
+let e = a && b || c;
+console.log(e); // 2
+let f = a || b && c;
+console.log(f); // 1
+let g = a || b || c;
+console.log(g); // 1
+let h = a && b && c;
+console.log(h); // 2
+let i = a && b && c || d;
+console.log(i); // 2
+```
+在实际开发中最好两边都是逻辑判断空数组和字符串默认为true。
 ##### 1.4.1.6switch语句 
  
 它是通过判断表达式的结果（或者变量）是否等于case语句的常量，来执行相应的分支体的；与if语句不同的是，switch语句只能做值的相等判断（使用全等运算符 ===），而if语句可以做值的范围判断。
@@ -2581,7 +2676,6 @@ trim，trimStart，trimEnd三个方法都是用来去除字符串中的空字符
 
 # 参考资料
 -   JavaScript高级程序设计（第4版）
--  [ 维基百科](https://zh.wikipedia.org/wiki/Wikipedia:%E9%A6%96%E9%A1%B5)
 -  [MDN](https://developer.mozilla.org/en-US/)
 -  [鲨鱼哥的面试题总结](https://github.com/BigSharkLx/front-end-interview/blob/main/5%20offer%E6%94%B6%E5%89%B2%E6%9C%BA%E4%B9%8BJavaScript%E7%AF%87.md)
 -  解锁前端面试体系核心攻略
