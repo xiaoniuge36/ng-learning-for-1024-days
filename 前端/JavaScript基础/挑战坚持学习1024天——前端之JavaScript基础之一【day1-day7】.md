@@ -1333,6 +1333,21 @@ console.log(helloString); // 抛出错误：hello 在全局作用域未定义
 console.log(a);//1
 console.log(b);//报错 const同理
 ```
+对于对象来说不是一个块级作用域如下箭头函数查找规则可看出。
+```js
+   var obj = {
+    name: "obj",
+    foo: () => {
+        var bar = () => {
+            console.log("bar:", this)
+        }
+        return bar
+
+    }
+}
+var fn = obj.foo()
+fn.apply("bbb")//window
+```
 可以看出，块作用域内的变量只要出了自己被定义的那个代码块，那么就无法访问了，而var没有块级作用域的概念。这点和函数作用域比较相似 —— 它们都只在“自己的地盘”上生效，所以它们也统称为” 局部作用域 “。
 
 ## 3.作用域链
